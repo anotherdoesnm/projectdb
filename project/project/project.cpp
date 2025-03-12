@@ -1,8 +1,13 @@
-﻿#include "pch.h"
+﻿#include "MyForm.h"
 
 using namespace System;
+using namespace System::Windows::Forms;
+[STAThread]
 
-int main(array<System::String ^> ^args)
+void main(array<String^>^ args)
 {
-    return 0;
+	Application::EnableVisualStyles();
+	Application::SetCompatibleTextRenderingDefault(false);
+	project::MyForm form;
+	Application::Run(% form);
 }
