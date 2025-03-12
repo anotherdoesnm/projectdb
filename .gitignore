@@ -33,3 +33,6 @@
 
 *.vsdix
 *.wsuo
+
+project/.vs/
+.vs/
