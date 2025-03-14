@@ -4,8 +4,10 @@
     "\\Alex",
     "\\Nickx",
     "\\project",
-    "\\project\\project"
+    "\\project\\project",
+    "\\project\\project\\x64\\Debug",
+    "\\project\\x64"
   ],
-  "SelectedNode": "\\project\\project\\MyForm.h",
+  "SelectedNode": "\\project\\project\\project.vcxproj",
   "PreviewInSolutionExplorer": false
 }

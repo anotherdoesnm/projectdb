@@ -8,5 +8,10 @@
 #define PCH_H
 
 // Добавьте сюда заголовочные файлы для предварительной компиляции
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <Windows.h>
 
 #endif //PCH_H

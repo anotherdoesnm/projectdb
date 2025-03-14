@@ -1,4 +1,5 @@
 #include "MyForm.h"
+#include "pch.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
