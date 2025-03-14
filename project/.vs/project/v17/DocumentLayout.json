@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "E:\\DB\\project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4AF918EA-F23C-4B27-A3D2-14000C3D7489}|project\\project.vcxproj|E:\\DB\\project\\project\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{4AF918EA-F23C-4B27-A3D2-14000C3D7489}|project\\project.vcxproj|solutionrelative:project\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4AF918EA-F23C-4B27-A3D2-14000C3D7489}|project\\project.vcxproj|E:\\DB\\project\\project\\MyForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{4AF918EA-F23C-4B27-A3D2-14000C3D7489}|project\\project.vcxproj|solutionrelative:project\\MyForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AF918EA-F23C-4B27-A3D2-14000C3D7489}|project\\project.vcxproj|E:\\DB\\project\\project\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4AF918EA-F23C-4B27-A3D2-14000C3D7489}|project\\project.vcxproj|solutionrelative:project\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,28 +26,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MyForm.h",
               "DocumentMoniker": "E:\\DB\\project\\project\\MyForm.h",
               "RelativeDocumentMoniker": "project\\MyForm.h",
               "ToolTip": "E:\\DB\\project\\project\\MyForm.h",
               "RelativeToolTip": "project\\MyForm.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-12T17:54:58.181Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MyForm.cpp",
               "DocumentMoniker": "E:\\DB\\project\\project\\MyForm.cpp",
               "RelativeDocumentMoniker": "project\\MyForm.cpp",
-              "ToolTip": "E:\\DB\\project\\project\\MyForm.cpp",
-              "RelativeToolTip": "project\\MyForm.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAaAAAAAAAAAA==",
+              "ToolTip": "E:\\DB\\project\\project\\MyForm.cpp*",
+              "RelativeToolTip": "project\\MyForm.cpp*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-12T18:17:27.698Z"
+              "WhenOpened": "2025-03-12T18:17:27.698Z",
+              "EditorCaption": ""
             }
           ]
         }
