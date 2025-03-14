@@ -1,3 +1,3 @@
 ﻿  MyForm.cpp
-  MyForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  project.vcxproj -> E:\DB\project\x64\Debug\project.exe
+  MyForm.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+  project.vcxproj -> C:\Users\Student02\source\repos\projectdb2\project\x64\Debug\project.exe
