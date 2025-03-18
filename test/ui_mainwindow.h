@@ -15,6 +15,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -27,6 +28,7 @@ public:
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QPushButton *pushButton;
+    QRadioButton *radioButton;
     QLabel *label;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -35,7 +37,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(400, 300);
+        MainWindow->resize(400, 259);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -45,6 +47,11 @@ public:
 
         verticalLayout->addWidget(pushButton);
 
+        radioButton = new QRadioButton(centralwidget);
+        radioButton->setObjectName("radioButton");
+
+        verticalLayout->addWidget(radioButton);
+
         label = new QLabel(centralwidget);
         label->setObjectName("label");
 
@@ -53,6 +60,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
+        menubar->setGeometry(QRect(0, 0, 400, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -67,6 +75,7 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Qt + GCC/G++ Template", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260\320\266\320\274\320\270 \320\274\320\265\320\275\321\217", nullptr));
+        radioButton->setText(QCoreApplication::translate("MainWindow", "RadioButton", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "\320\237\321\200\320\270\320\262\320\265\321\202, Qt!", nullptr));
     } // retranslateUi
 

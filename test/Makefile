@@ -274,6 +274,7 @@ Makefile: QtProject.pro C:/msys64/mingw64/share/qt6/mkspecs/win32-g++/qmake.conf
 		C:/msys64/mingw64/share/qt6/mkspecs/features/moc.prf \
 		C:/msys64/mingw64/share/qt6/mkspecs/features/win32/opengl.prf \
 		C:/msys64/mingw64/share/qt6/mkspecs/features/uic.prf \
+		C:/msys64/mingw64/share/qt6/mkspecs/features/designer_defines.prf \
 		C:/msys64/mingw64/share/qt6/mkspecs/features/qmake_use.prf \
 		C:/msys64/mingw64/share/qt6/mkspecs/features/file_copies.prf \
 		C:/msys64/mingw64/share/qt6/mkspecs/features/testcase_targets.prf \
@@ -487,6 +488,7 @@ C:/msys64/mingw64/share/qt6/mkspecs/features/resources.prf:
 C:/msys64/mingw64/share/qt6/mkspecs/features/moc.prf:
 C:/msys64/mingw64/share/qt6/mkspecs/features/win32/opengl.prf:
 C:/msys64/mingw64/share/qt6/mkspecs/features/uic.prf:
+C:/msys64/mingw64/share/qt6/mkspecs/features/designer_defines.prf:
 C:/msys64/mingw64/share/qt6/mkspecs/features/qmake_use.prf:
 C:/msys64/mingw64/share/qt6/mkspecs/features/file_copies.prf:
 C:/msys64/mingw64/share/qt6/mkspecs/features/testcase_targets.prf:
