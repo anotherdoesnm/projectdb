@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1299</width>
-    <height>135</height>
+    <width>992</width>
+    <height>697</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>992</width>
+    <height>16777215</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Qt + GCC/G++ Template</string>
@@ -16,37 +22,109 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QPushButton" name="pushButton">
-      <property name="text">
-       <string>Нажми меня</string>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
       </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QRadioButton" name="radioButton">
-      <property name="text">
-       <string>RadioButton</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Привет, Qt!</string>
-      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>972</width>
+         <height>655</height>
+        </rect>
+       </property>
+       <widget class="QComboBox" name="comboBox">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>91</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>name</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Person</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>GardenTools</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ToolTransfers</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>TransferHistory</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QPlainTextEdit" name="plainTextEdit">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>50</y>
+          <width>721</width>
+          <height>541</height>
+         </rect>
+        </property>
+        <property name="plainText">
+         <string>id	type		brand	model	price	serial_number
+
+1	Лопата		Gardena	Classic	1500	SN001
+2	Грабли		Bosch	Easy	800	SN002
+3	Секатор		Fiskars	PowerGear	1200	SN003
+4	Топор		Stihl	X10	2500	SN004
+5	Мотыга		Husqvarna	Pro	900	SN005
+6	Тачка		Wolf-Garten	Multi-Star	3500	SN006
+7	Садовый шланг	Karcher	Flex	2000	SN007
+8	Газонокосилка	Honda	HRX	15000	SN008
+9	Садовый насос	Gardena	Comfort	5000	SN009
+10	Садовый пылесос	Black+Decker	GWC360	4000	SN010
+11	Садовый культиватор	Makita	EK6101	12000	SN011
+12	Садовая мебель	IKEA	ÄPPLARÖ	8000	SN012
+13	Садовый фонарь	Philips	Hue	3000	SN013
+14	Садовая скамейка	Leroy Merlin	Bistro	2500	SN014
+15	Садовая фигура	Garden Art	Gnome	1500	SN015
+16	Садовая сетка	Netting	Garden	 Protect	600	SN016
+17	Садовая лейка	Haws	Heritage	1200	SN017
+18	Садовый термометр	AccuWeather	Digital	800	SN018
+19	Садовая мотыга	Fiskars	Garden	1000	SN019
+20	Садовая лопата	Wolf-Garten	Multi-Star	1800	SN020
+21	Лопата		Gardena	Classic	1500	SN001
+22	Грабли		Bosch	Easy	800	SN002
+23	Секатор		Fiskars	PowerGear	1200	SN003
+24	Топор		Stihl	X10	2500	SN004
+25	Мотыга		Husqvarna	Pro	900	SN005
+26	Тачка		Wolf-Garten	Multi-Star	3500	SN006
+27	Садовый шланг	Karcher	Flex	2000	SN007
+28	Газонокосилка	Honda	HRX	15000	SN008
+29	Садовый насос	Gardena	Comfort	5000	SN009
+30	Садовый пылесос	Black+Decker	GWC360	4000	SN010
+</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1299</width>
-     <height>21</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
