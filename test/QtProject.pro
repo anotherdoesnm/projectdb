@@ -1,4 +1,4 @@
-QT += core gui widgets designer uitools
+QT += core gui widgets designer uitools sql
 
 CONFIG += c++17 console
 
