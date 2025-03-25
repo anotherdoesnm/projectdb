@@ -15,6 +15,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableView>
@@ -33,6 +34,7 @@ public:
     QComboBox *comboBox;
     QLabel *label;
     QTableView *tableView;
+    QPushButton *saveButton;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -65,6 +67,9 @@ public:
         tableView = new QTableView(scrollAreaWidgetContents);
         tableView->setObjectName("tableView");
         tableView->setGeometry(QRect(15, 51, 941, 531));
+        saveButton = new QPushButton(scrollAreaWidgetContents);
+        saveButton->setObjectName("saveButton");
+        saveButton->setGeometry(QRect(230, 10, 80, 24));
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         verticalLayout->addWidget(scrollArea);
@@ -88,6 +93,7 @@ public:
         comboBox->setItemText(3, QCoreApplication::translate("MainWindow", "TransferHistory", nullptr));
 
         label->setText(QCoreApplication::translate("MainWindow", "Last Error:", nullptr));
+        saveButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\236\320\245\320\240\320\220\320\235\320\230\320\242\320\254\320\261\320\273", nullptr));
     } // retranslateUi
 
 };

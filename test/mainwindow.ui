@@ -94,6 +94,19 @@
          </rect>
         </property>
        </widget>
+       <widget class="QPushButton" name="saveButton">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>10</y>
+          <width>80</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>СОХРАНИТЬбл</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>

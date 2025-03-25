@@ -4,6 +4,7 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QSqlTableModel>
 #include <QDebug>
 // #include <QtUiTools>
 // #include <QMessageBox>
@@ -27,9 +28,15 @@ MainWindow::~MainWindow() {}
 
 void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
 {
-    QSqlQueryModel *model = new QSqlQueryModel;
-    //model->setHeaderData();
-    model->setQuery(QString("SELECT * FROM %1").arg(arg1));
+    QSqlTableModel *model = new QSqlTableModel;
+    model->setEditStrategy(QSqlTableModel::OnFieldChange);
+    model->setTable(arg1);
+    model->select();
+
     ui->tableView->setModel(model);
 }
 
+
+void MainWindow::on_saveButton_clicked() {
+    QSqlTableModel *model = qobject_cast<QSqlTableModel*>(ui->tableView->model());
+}
