@@ -11,12 +11,13 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -27,41 +28,48 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
-    QPushButton *pushButton;
-    QRadioButton *radioButton;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QComboBox *comboBox;
     QLabel *label;
-    QMenuBar *menubar;
+    QTableView *tableView;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(1299, 135);
+        MainWindow->resize(992, 647);
+        MainWindow->setMaximumSize(QSize(992, 16777215));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         verticalLayout = new QVBoxLayout(centralwidget);
         verticalLayout->setObjectName("verticalLayout");
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName("pushButton");
-
-        verticalLayout->addWidget(pushButton);
-
-        radioButton = new QRadioButton(centralwidget);
-        radioButton->setObjectName("radioButton");
-
-        verticalLayout->addWidget(radioButton);
-
-        label = new QLabel(centralwidget);
+        scrollArea = new QScrollArea(centralwidget);
+        scrollArea->setObjectName("scrollArea");
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 972, 605));
+        comboBox = new QComboBox(scrollAreaWidgetContents);
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->setObjectName("comboBox");
+        comboBox->setGeometry(QRect(10, 10, 91, 24));
+        comboBox->setMinimumSize(QSize(0, 24));
+        label = new QLabel(scrollAreaWidgetContents);
         label->setObjectName("label");
+        label->setGeometry(QRect(110, 10, 311, 21));
+        tableView = new QTableView(scrollAreaWidgetContents);
+        tableView->setObjectName("tableView");
+        tableView->setGeometry(QRect(15, 51, 941, 531));
+        scrollArea->setWidget(scrollAreaWidgetContents);
 
-        verticalLayout->addWidget(label);
+        verticalLayout->addWidget(scrollArea);
 
         MainWindow->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1299, 21));
-        MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
         MainWindow->setStatusBar(statusbar);
@@ -74,9 +82,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Qt + GCC/G++ Template", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260\320\266\320\274\320\270 \320\274\320\265\320\275\321\217", nullptr));
-        radioButton->setText(QCoreApplication::translate("MainWindow", "RadioButton", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "\320\237\321\200\320\270\320\262\320\265\321\202, Qt!", nullptr));
+        comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "Person", nullptr));
+        comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "GardenTools", nullptr));
+        comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "ToolTransfers", nullptr));
+        comboBox->setItemText(3, QCoreApplication::translate("MainWindow", "TransferHistory", nullptr));
+
+        label->setText(QCoreApplication::translate("MainWindow", "Last Error:", nullptr));
     } // retranslateUi
 
 };

@@ -7,7 +7,7 @@
 #include <QDebug>
 // #include <QtUiTools>
 // #include <QMessageBox>
-
+#include <QSqlQueryModel>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::MainWindow) {
@@ -17,9 +17,19 @@ MainWindow::MainWindow(QWidget *parent)
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("test.db");
     db.open();
-    QSqlQuery q;
-    q.exec("CREATE TABLE (test text);");
-    db.close();
+    QSqlQueryModel *model = new QSqlQueryModel;
+    //model->setHeaderData();
+    model->setQuery(QString("SELECT * FROM Person"));
+    ui->tableView->setModel(model);
 }
 
 MainWindow::~MainWindow() {}
+
+void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
+{
+    QSqlQueryModel *model = new QSqlQueryModel;
+    //model->setHeaderData();
+    model->setQuery(QString("SELECT * FROM %1").arg(arg1));
+    ui->tableView->setModel(model);
+}
+

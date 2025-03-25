@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QSqlDatabase>
 namespace Ui {
 class MainWindow;
 }
@@ -14,7 +14,10 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    private:
+private slots:
+    void on_comboBox_currentTextChanged(const QString &arg1);
+
+private:
         Ui::MainWindow *ui;
 };
 
