@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFile>
 #include <QSqlDatabase>
@@ -28,10 +28,12 @@ MainWindow::~MainWindow() {}
 
 void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
 {
+    // Когда текст в comboBox меняется, эта функция вызывается.
+    // создаем новую модель данных (QSqlTableModel) для работы с базой данных.
     QSqlTableModel *model = new QSqlTableModel;
-    model->setEditStrategy(QSqlTableModel::OnFieldChange);
-    model->setTable(arg1);
-    model->select();
+    model->setEditStrategy(QSqlTableModel::OnFieldChange); // устанавливаем стратегию редактирования данных в модели.
+    model->setTable(arg1);// устанавливаем таблицу в модели, которая соответствует выбранному тексту в comboBox.
+    model->select();// выбираем данные из таблицы и загружаем их в модель.
 
     ui->tableView->setModel(model);
 }
@@ -39,4 +41,8 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
 
 void MainWindow::on_saveButton_clicked() {
     QSqlTableModel *model = qobject_cast<QSqlTableModel*>(ui->tableView->model());
+    // Когда кнопка saveButton нажата, эта функция вызывается.
+    // Мы получаем модель данных из tableView.
+    model->submitAll(); // сохраняем данные в базу данных
+    // model->database().commit(); либо такой строкой то же самое
 }
