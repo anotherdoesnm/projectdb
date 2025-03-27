@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QSqlTableModel>
-
+#include <QSqlRelationalTableModel>
 namespace Ui {
 class MainWindow;
 }
@@ -33,7 +33,7 @@ private slots:
 private:
     int rowId;
     Ui::MainWindow *ui;
-    QSqlTableModel *model; // Model for the QTableView
+    QSqlRelationalTableModel *model; // Model for the QTableView
     void loadData(const QString &tableName); // Это функция, которая загружает данные из базы данных в модель данных (QSqlTableModel) на основе имени таблицы (tableName).
     // Параметр tableName представляет собой имя таблицы, данные из которой необходимо загрузить.
 };
