@@ -12,6 +12,9 @@
 #include <QSqlQueryModel>
 #include <QModelIndex>
 #include <QAbstractItemView>
+#include <QSqlRelationalTableModel>
+#include <QSqlRelation>
+#include <QSqlRelationalDelegate>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::MainWindow) {
@@ -21,11 +24,13 @@ MainWindow::MainWindow(QWidget *parent)
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("test.db");
     db.open();
-    this->model = new QSqlTableModel;
+    this->model = new QSqlRelationalTableModel;
     this->model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    this->model->setRelation(4,QSqlRelation("tool_id","id","type"));
     this->model->setTable("Person");
     this->model->select();
     ui->tableView->setModel(model);
+    ui->tableView->setItemDelegate(new QSqlRelationalDelegate(ui->tableView));
 }
 
 MainWindow::~MainWindow() {}
