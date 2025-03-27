@@ -11,6 +11,7 @@
 // #include <QMessageBox>
 #include <QSqlQueryModel>
 #include <QModelIndex>
+#include <QAbstractItemView>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::MainWindow) {
@@ -35,7 +36,13 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
     // создаем новую модель данных (QSqlTableModel) для работы с базой данных.
     this->model->setTable(arg1);// устанавливаем таблицу в модели, которая соответствует выбранному тексту в comboBox.
     this->model->select();// выбираем данные из таблицы и загружаем их в модель.
-
+    if(arg1 == "TransferHistory"){
+        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        ui->pushButton_2->setEnabled(false);
+    }else{
+        ui->tableView->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
+        ui->pushButton_2->setEnabled(true);
+    }
     ui->tableView->setModel(model);
 }
 
