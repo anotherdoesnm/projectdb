@@ -54,7 +54,6 @@ void MainWindow::on_pushButton_clicked()
     QSqlRecord record = this->model->record();
     record.remove(record.indexOf("id"));
     this->model->insertRecord(-1,record);
-    this->model->submitAll();
 }
 
 
@@ -66,9 +65,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 }
 
 
-void MainWindow::on_pushButton_2_clicked()
-{
-    this->model->setTable(ui->comboBox->currentText());
+void MainWindow::on_pushButton_2_clicked(){
     this->model->removeRow(this->rowId,QModelIndex());
 
 }
