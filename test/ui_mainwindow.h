@@ -13,7 +13,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
@@ -32,9 +31,10 @@ public:
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QComboBox *comboBox;
-    QLabel *label;
     QTableView *tableView;
     QPushButton *saveButton;
+    QPushButton *pushButton;
+    QPushButton *pushButton_2;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -61,15 +61,18 @@ public:
         comboBox->setObjectName("comboBox");
         comboBox->setGeometry(QRect(10, 10, 91, 24));
         comboBox->setMinimumSize(QSize(0, 24));
-        label = new QLabel(scrollAreaWidgetContents);
-        label->setObjectName("label");
-        label->setGeometry(QRect(110, 10, 311, 21));
         tableView = new QTableView(scrollAreaWidgetContents);
         tableView->setObjectName("tableView");
         tableView->setGeometry(QRect(15, 51, 941, 531));
         saveButton = new QPushButton(scrollAreaWidgetContents);
         saveButton->setObjectName("saveButton");
-        saveButton->setGeometry(QRect(230, 10, 80, 24));
+        saveButton->setGeometry(QRect(110, 10, 91, 24));
+        pushButton = new QPushButton(scrollAreaWidgetContents);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(210, 10, 80, 24));
+        pushButton_2 = new QPushButton(scrollAreaWidgetContents);
+        pushButton_2->setObjectName("pushButton_2");
+        pushButton_2->setGeometry(QRect(300, 10, 80, 24));
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         verticalLayout->addWidget(scrollArea);
@@ -92,8 +95,9 @@ public:
         comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "ToolTransfers", nullptr));
         comboBox->setItemText(3, QCoreApplication::translate("MainWindow", "TransferHistory", nullptr));
 
-        label->setText(QCoreApplication::translate("MainWindow", "Last Error:", nullptr));
-        saveButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\236\320\245\320\240\320\220\320\235\320\230\320\242\320\254\320\261\320\273", nullptr));
+        saveButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\236\320\245\320\240\320\220\320\235\320\230\320\242\320\254", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\236\320\227\320\224\320\220\320\242\320\254", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "\320\243\320\224\320\220\320\233\320\230\320\242\320\254", nullptr));
     } // retranslateUi
 
 };

@@ -24,7 +24,14 @@ private slots:
 
     void on_saveButton_clicked();  // Этот слот вызывается при нажатии кнопки saveButton.
 
+    void on_pushButton_clicked();
+
+    void on_tableView_clicked(const QModelIndex &index);
+
+    void on_pushButton_2_clicked();
+
 private:
+    int rowId;
     Ui::MainWindow *ui;
     QSqlTableModel *model; // Model for the QTableView
     void loadData(const QString &tableName); // Это функция, которая загружает данные из базы данных в модель данных (QSqlTableModel) на основе имени таблицы (tableName).
