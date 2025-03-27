@@ -20,10 +20,10 @@ MainWindow::MainWindow(QWidget *parent)
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("test.db");
     db.open();
-    QSqlTableModel *model = new QSqlTableModel;
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    model->setTable("Person");
-    model->select();
+    this->model = new QSqlTableModel;
+    this->model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    this->model->setTable("Person");
+    this->model->select();
     ui->tableView->setModel(model);
 }
 
