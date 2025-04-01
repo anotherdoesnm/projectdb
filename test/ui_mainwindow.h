@@ -11,10 +11,12 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableView>
@@ -35,6 +37,8 @@ public:
     QPushButton *saveButton;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
+    QRadioButton *radioButton2;
+    QCheckBox *radioButton;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -73,6 +77,12 @@ public:
         pushButton_2 = new QPushButton(scrollAreaWidgetContents);
         pushButton_2->setObjectName("pushButton_2");
         pushButton_2->setGeometry(QRect(300, 10, 80, 24));
+        radioButton2 = new QRadioButton(scrollAreaWidgetContents);
+        radioButton2->setObjectName("radioButton2");
+        radioButton2->setGeometry(QRect(400, 10, 91, 22));
+        radioButton = new QCheckBox(scrollAreaWidgetContents);
+        radioButton->setObjectName("radioButton");
+        radioButton->setGeometry(QRect(510, 10, 78, 22));
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         verticalLayout->addWidget(scrollArea);
@@ -98,6 +108,8 @@ public:
         saveButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\236\320\245\320\240\320\220\320\235\320\230\320\242\320\254", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\236\320\227\320\224\320\220\320\242\320\254", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "\320\243\320\224\320\220\320\233\320\230\320\242\320\254", nullptr));
+        radioButton2->setText(QCoreApplication::translate("MainWindow", "RadioButton", nullptr));
+        radioButton->setText(QCoreApplication::translate("MainWindow", "CheckBox", nullptr));
     } // retranslateUi
 
 };

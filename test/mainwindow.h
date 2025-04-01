@@ -19,6 +19,7 @@ public:
     // Слово explicit означает, что этот конструктор не может быть использован для неявного преобразования типов.
 
 private slots:
+
     void on_comboBox_currentTextChanged(const QString &arg1);  // Этот слот (функция-обработчик) вызывается при изменении текущего текста в comboBox.
     // Параметр arg1 представляет собой текущий текст в comboBox.
 
@@ -29,6 +30,8 @@ private slots:
     void on_tableView_clicked(const QModelIndex &index);
 
     void on_pushButton_2_clicked();
+
+    void on_radioButton_toggled(bool checked);
 
 private:
     int rowId;

@@ -12,6 +12,41 @@
 #include <QSqlQueryModel>
 #include <QModelIndex>
 #include <QAbstractItemView>
+#include <QSqlRelationalTableModel>
+
+void MainWindow::on_radioButton_toggled(bool checked) {
+    if (checked) {
+        // Step 1: Retrieve tool_id values from ToolTransfers
+        QSqlQuery query;
+        query.prepare("SELECT tool_id FROM ToolTransfers");
+
+        if (query.exec()) {
+            while (query.next()) {
+                QString toolId = query.value(0).toString();
+
+                // Step 2: Lookup the corresponding type from GardenTools
+                QSqlQuery typeQuery;
+                typeQuery.prepare("SELECT type FROM GardenTools WHERE tool_id = :toolId");
+                typeQuery.bindValue(":toolId", toolId);
+
+                if (typeQuery.exec() && typeQuery.next()) {
+                    QString type = typeQuery.value(0).toString();
+
+                    // Step 3: Update the ToolTransfers model
+                    QSqlQuery updateQuery;
+                    updateQuery.prepare("UPDATE ToolTransfers SET tool_id = :type WHERE tool_id = :toolId");
+                    updateQuery.bindValue(":type", type);
+                    updateQuery.bindValue(":toolId", toolId);
+                    updateQuery.exec();
+                }
+            }
+        }
+
+        // Step 4: Refresh the model to reflect changes
+        this->model->select();
+    }
+}
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -20,9 +55,12 @@ MainWindow::MainWindow(QWidget *parent)
     resize(1000, 1000);
     ui->setupUi(this);
 
+    connect(ui->radioButton, &QRadioButton::toggled, this, &MainWindow::on_radioButton_toggled);
+
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("test.db");
     db.open();
+    // this->model = new QSqlTableModel(this);
     this->model = new QSqlRelationalTableModel(this);
     this->model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     this->model->setTable("Person");
@@ -41,7 +79,16 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
     if(arg1 == "TransferHistory"){
         ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ui->pushButton_2->setEnabled(false);
-    }else{
+    } else if (arg1 == "ToolTransfers") {
+
+        // Set up the relation to the GardenTools table
+        this->model->setRelation(this->model->fieldIndex("tool_id"), QSqlRelation("GardenTools", "tool_id", "type"));
+
+        // Select data from the ToolTransfers table
+
+        // Set the model to the table view
+    }
+    else{
         ui->tableView->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
         ui->pushButton_2->setEnabled(true);
     }
