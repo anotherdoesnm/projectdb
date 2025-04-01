@@ -6,11 +6,9 @@ TARGET = QtProject
 TEMPLATE = app
 
 SOURCES += main.cpp \
-           comboboxdelegate.cpp \
            mainwindow.cpp
 
-HEADERS += mainwindow.h \
-    comboboxdelegate.h
+HEADERS += mainwindow.h
 
 FORMS += mainwindow.ui
 

@@ -12,9 +12,6 @@
 #include <QSqlQueryModel>
 #include <QModelIndex>
 #include <QAbstractItemView>
-
-#include "comboboxdelegate.h"
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::MainWindow) {
@@ -46,8 +43,6 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
         ui->tableView->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
         ui->pushButton_2->setEnabled(true);
     }
-    ComboBoxDelegate *delegate = new ComboBoxDelegate(this);
-    ui->tableView->setItemDelegateForColumn(1, delegate);
     ui->tableView->setModel(model);
 }
 
