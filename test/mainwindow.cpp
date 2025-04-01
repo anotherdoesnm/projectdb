@@ -12,16 +12,18 @@
 #include <QSqlQueryModel>
 #include <QModelIndex>
 #include <QAbstractItemView>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::MainWindow) {
     setWindowTitle("Test");
-    resize(1000,1000);
+    resize(1000, 1000);
     ui->setupUi(this);
+
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("test.db");
     db.open();
-    this->model = new QSqlTableModel;
+    this->model = new QSqlRelationalTableModel(this);
     this->model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     this->model->setTable("Person");
     this->model->select();
