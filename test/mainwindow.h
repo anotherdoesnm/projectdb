@@ -19,26 +19,24 @@ public:
     // Слово explicit означает, что этот конструктор не может быть использован для неявного преобразования типов.
 
 private slots:
-
-    void on_comboBox_currentTextChanged(const QString &arg1);  // Этот слот (функция-обработчик) вызывается при изменении текущего текста в comboBox.
-    // Параметр arg1 представляет собой текущий текст в comboBox.
-
-    void on_saveButton_clicked();  // Этот слот вызывается при нажатии кнопки saveButton.
-
+    void on_comboBox_currentTextChanged(const QString &arg1);
+    void on_saveButton_clicked();
     void on_pushButton_clicked();
-
     void on_tableView_clicked(const QModelIndex &index);
-
     void on_pushButton_2_clicked();
-
     void on_radioButton_toggled(bool checked);
 
 private:
+    void setupDatabase();
+    void setupModel();
+    void updateToolDisplay();
+
     int rowId;
     Ui::MainWindow *ui;
-    QSqlRelationalTableModel *model; // Model for the QTableView
-    void loadData(const QString &tableName); // Это функция, которая загружает данные из базы данных в модель данных (QSqlTableModel) на основе имени таблицы (tableName).
+    QSqlRelationalTableModel *model;
+    void loadData(const QString &tableName);
+}; // Это функция, которая загружает данные из базы данных в модель данных (QSqlTableModel) на основе имени таблицы (tableName).
     // Параметр tableName представляет собой имя таблицы, данные из которой необходимо загрузить.
-};
+
 
 #endif // MAINWINDOW_H

@@ -1,5 +1,5 @@
 ﻿#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "ui_mainwindow.h"  // Add this line
 #include <QFile>
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -7,122 +7,112 @@
 #include <QSqlTableModel>
 #include <QDebug>
 #include <QSqlRecord>
-// #include <QtUiTools>
-// #include <QMessageBox>
 #include <QSqlQueryModel>
 #include <QModelIndex>
 #include <QAbstractItemView>
 #include <QSqlRelationalTableModel>
+#include <QRadioButton>  // Add this line
+#include <QCheckBox>     // Add this line
 
-void MainWindow::on_radioButton_toggled(bool checked) {
-    if (checked) {
-        // Step 1: Retrieve tool_id values from ToolTransfers
-        QSqlQuery query;
-        query.prepare("SELECT tool_id FROM ToolTransfers");
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    connect(ui->radioButton, &QRadioButton::toggled, this, &MainWindow::on_radioButton_toggled);
+    setupDatabase();
+    setupModel();
+    ui->tableView->setModel(model);
+}
 
-        if (query.exec()) {
-            while (query.next()) {
-                QString toolId = query.value(0).toString();
+void MainWindow::setupDatabase()
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("test.db");
+    if (!db.open()) {
+        qDebug() << "Database error:" << db.lastError().text();
+        return;
+    }
+    qDebug() << "Database opened successfully";
+}
 
-                // Step 2: Lookup the corresponding type from GardenTools
-                QSqlQuery typeQuery;
-                typeQuery.prepare("SELECT type FROM GardenTools WHERE tool_id = :toolId");
-                typeQuery.bindValue(":toolId", toolId);
-
-                if (typeQuery.exec() && typeQuery.next()) {
-                    QString type = typeQuery.value(0).toString();
-
-                    // Step 3: Update the ToolTransfers model
-                    QSqlQuery updateQuery;
-                    updateQuery.prepare("UPDATE ToolTransfers SET tool_id = :type WHERE tool_id = :toolId");
-                    updateQuery.bindValue(":type", type);
-                    updateQuery.bindValue(":toolId", toolId);
-                    updateQuery.exec();
-                }
-            }
-        }
-
-        // Step 4: Refresh the model to reflect changes
-        this->model->select();
+void MainWindow::setupModel()
+{
+    model = new QSqlRelationalTableModel(this);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setTable("Person");
+    if (!model->select()) {
+        qDebug() << "Error loading Person table:" << model->lastError().text();
     }
 }
 
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent),
-    ui(new Ui::MainWindow) {
-    setWindowTitle("Test");
-    resize(1000, 1000);
-    ui->setupUi(this);
+void MainWindow::on_radioButton_toggled(bool checked)
+{
+    if (checked) {
+        // Get the current table selection
+        QString currentTable = ui->comboBox->currentText();
 
-    connect(ui->radioButton, &QRadioButton::toggled, this, &MainWindow::on_radioButton_toggled);
+        // Make sure we're in ToolTransfers table
+        if (currentTable == "ToolTransfers") {
+            // Set the table explicitly
+            model->setTable(currentTable);
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("test.db");
-    db.open();
-    // this->model = new QSqlTableModel(this);
-    this->model = new QSqlRelationalTableModel(this);
-    this->model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    this->model->setTable("Person");
-    this->model->select();
-    ui->tableView->setModel(model);
+            // Set up the relation
+            int toolIdIndex = model->fieldIndex("tool_id");
+            if (toolIdIndex != -1) {
+                model->setRelation(toolIdIndex, QSqlRelation("GardenTools", "id", "type"));
+                model->select();  // Refresh the view
+            }
+
+            // Set the model back to the table view
+            ui->tableView->setModel(model);
+        }
+    }
 }
-
-MainWindow::~MainWindow() {}
 
 void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
 {
-    // Когда текст в comboBox меняется, эта функция вызывается.
-    // создаем новую модель данных (QSqlTableModel) для работы с базой данных.
-    this->model->setTable(arg1);// устанавливаем таблицу в модели, которая соответствует выбранному тексту в comboBox.
-    this->model->select();// выбираем данные из таблицы и загружаем их в модель.
-    if(arg1 == "TransferHistory"){
+    model->setTable(arg1);
+    model->select();
+
+    if (arg1 == "TransferHistory") {
         ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ui->pushButton_2->setEnabled(false);
-    } else if (arg1 == "ToolTransfers") {
-
-        // Set up the relation to the GardenTools table
-        this->model->setRelation(this->model->fieldIndex("tool_id"), QSqlRelation("GardenTools", "tool_id", "type"));
-
-        // Select data from the ToolTransfers table
-
-        // Set the model to the table view
-    }
-    else{
+    } else {
         ui->tableView->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
         ui->pushButton_2->setEnabled(true);
+    }
+
+    if (!model->select()) {
+        qDebug() << "Error selecting data:" << model->lastError().text();
     }
     ui->tableView->setModel(model);
 }
 
-
-void MainWindow::on_saveButton_clicked() {
-    //QSqlTableModel *model = qobject_cast<QSqlTableModel*>(ui->tableView->model());
-    // Когда кнопка saveButton нажата, эта функция вызывается.
-    // Мы получаем модель данных из tableView.
-    this->model->submitAll(); // сохраняем данные в базу данных
-    // model->database(). commit(); либо такой строкой то же самое
+void MainWindow::on_saveButton_clicked()
+{
+    model->submitAll();
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-
-    QSqlRecord record = this->model->record();
+    QSqlRecord record = model->record();
     record.remove(record.indexOf("id"));
-    this->model->insertRecord(-1,record);
+    model->insertRecord(-1, record);
 }
-
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
-    int row = index.row();
-    //int id = model->data(model->index(row,0)).toInt();
-    this->rowId = row;
+    rowId = index.row();
 }
 
-
-void MainWindow::on_pushButton_2_clicked(){
-    this->model->removeRow(this->rowId,QModelIndex());
-
+void MainWindow::on_pushButton_2_clicked()
+{
+    model->removeRow(rowId, QModelIndex());
 }
 
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
