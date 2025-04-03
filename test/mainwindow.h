@@ -32,6 +32,8 @@ private:
     void updateToolDisplay();
 
     void setupzad();
+    void addTransferHistory(); // Объявление метода
+    QString selectedToWho;
 
     int rowId;
     Ui::MainWindow *ui;

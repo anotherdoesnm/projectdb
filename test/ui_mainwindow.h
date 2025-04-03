@@ -78,10 +78,11 @@ public:
         pushButton_2->setGeometry(QRect(300, 10, 80, 24));
         radioButton = new QCheckBox(scrollAreaWidgetContents);
         radioButton->setObjectName("radioButton");
-        radioButton->setGeometry(QRect(390, 10, 78, 22));
+        radioButton->setGeometry(QRect(400, 0, 78, 22));
         zad = new QComboBox(scrollAreaWidgetContents);
         zad->setObjectName("zad");
-        zad->setGeometry(QRect(410, 60, 72, 24));
+        zad->setGeometry(QRect(400, 20, 221, 21));
+        zad->setMaxVisibleItems(20);
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         verticalLayout->addWidget(scrollArea);

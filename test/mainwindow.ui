@@ -123,8 +123,8 @@
        <widget class="QCheckBox" name="radioButton">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>10</y>
+          <x>400</x>
+          <y>0</y>
           <width>78</width>
           <height>22</height>
          </rect>
@@ -136,11 +136,14 @@
        <widget class="QComboBox" name="zad">
         <property name="geometry">
          <rect>
-          <x>480</x>
-          <y>10</y>
-          <width>72</width>
-          <height>24</height>
+          <x>400</x>
+          <y>20</y>
+          <width>221</width>
+          <height>21</height>
          </rect>
+        </property>
+        <property name="maxVisibleItems">
+         <number>20</number>
         </property>
        </widget>
       </widget>

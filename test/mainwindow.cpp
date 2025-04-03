@@ -14,6 +14,8 @@
 #include <QRadioButton>
 #include <QCheckBox>
 
+#include <QDate>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -90,6 +92,7 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
 void MainWindow::on_saveButton_clicked()
 {
     model->submitAll();
+    addTransferHistory();
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -104,6 +107,10 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
     rowId = index.row();
 
     QString toWho = model->data(model->index(rowId, model->fieldIndex("to_who"))).toString();
+
+    // Сохраняем значение для дальнейшего использования
+    selectedToWho = toWho;
+
     if (!ui->zad->findText(toWho)) {
         ui->zad->addItem(toWho);
     }
@@ -115,12 +122,28 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::setupzad()
 {
-    // Очистите текущие элементы в zad
+    // подтираем zad
     ui->zad->clear();
-    QSqlQuery query("SELECT DISTINCT to_who FROM ToolTransfers");
+    QSqlQuery query("SELECT FIO FROM Person");
     while (query.next()) {
         QString toWho = query.value(0).toString();
-        ui->zad->addItem(toWho); // Добавьте элемент в zad
+        ui->zad->addItem(toWho); // впихиваем элемент в zad
+    }
+}
+
+void MainWindow::addTransferHistory()
+{
+    // Создаем новую запись для истории переводов
+    QSqlQuery query;
+    query.prepare("INSERT INTO TransferHistory (to_who, transfer_date) VALUES (:to_who, :date)");
+    query.bindValue(":to_who", this->selectedToWho);
+    query.bindValue(":date", QDate::currentDate());
+
+    if (!query.exec()) {
+        qDebug() << "Error adding to TransferHistory:" << query.lastError().text();
+        qDebug() << QDate::currentDate();
+    } else {
+        qDebug() << "Transfer history entry added successfully.";
     }
 }
 
