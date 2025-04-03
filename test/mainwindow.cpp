@@ -49,33 +49,27 @@ void MainWindow::setupModel()
 
 void MainWindow::on_radioButton_toggled(bool checked)
 {
+    QString currentTable = ui->comboBox->currentText();
+    int toolIdIndex = model->fieldIndex("tool_id");
+    if(currentTable == "ToolTransfers"){
     if (checked) {
-        // Get the current table selection
-        QString currentTable = ui->comboBox->currentText();
-
-        // Make sure we're in ToolTransfers table
-        if (currentTable == "ToolTransfers") {
-            // Set the table explicitly
-            model->setTable(currentTable);
-
-            // Set up the relation
-            int toolIdIndex = model->fieldIndex("tool_id");
-            if (toolIdIndex != -1) {
                 model->setRelation(toolIdIndex, QSqlRelation("GardenTools", "id", "type"));
-                model->select();  // Refresh the view
-            }
+                model->select();
+    }else{
+        //model->setRelation(toolIdIndex, QSqlRelation());
+        model->setTable("ToolTransfers");
+        model->select();
 
-            // Set the model back to the table view
-            ui->tableView->setModel(model);
-        }
     }
+    ui->tableView->setModel(model);
+    ui->tableView->reset();
 }
-
+}
 void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
 {
     model->setTable(arg1);
     model->select();
-
+    ui->radioButton->setChecked(false);
     if (arg1 == "TransferHistory") {
         ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ui->pushButton_2->setEnabled(false);

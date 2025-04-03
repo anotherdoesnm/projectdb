@@ -120,23 +120,10 @@
          <string>УДАЛИТЬ</string>
         </property>
        </widget>
-       <widget class="QRadioButton" name="radioButton2">
-        <property name="geometry">
-         <rect>
-          <x>400</x>
-          <y>10</y>
-          <width>91</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>RadioButton</string>
-        </property>
-       </widget>
        <widget class="QCheckBox" name="radioButton">
         <property name="geometry">
          <rect>
-          <x>510</x>
+          <x>390</x>
           <y>10</y>
           <width>78</width>
           <height>22</height>
