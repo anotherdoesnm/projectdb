@@ -11,8 +11,8 @@
 #include <QModelIndex>
 #include <QAbstractItemView>
 #include <QSqlRelationalTableModel>
-#include <QRadioButton>  // Add this line
-#include <QCheckBox>     // Add this line
+#include <QRadioButton>
+#include <QCheckBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,8 +20,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(ui->radioButton, &QRadioButton::toggled, this, &MainWindow::on_radioButton_toggled);
+    connect(ui->zad, &QComboBox::currentTextChanged, this, &MainWindow::on_comboBox_currentTextChanged);
     setupDatabase();
     setupModel();
+    setupzad();
     ui->tableView->setModel(model);
 }
 
@@ -70,6 +72,7 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
     model->setTable(arg1);
     model->select();
     ui->radioButton->setChecked(false);
+
     if (arg1 == "TransferHistory") {
         ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ui->pushButton_2->setEnabled(false);
@@ -99,12 +102,28 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
     rowId = index.row();
-}
 
+    QString toWho = model->data(model->index(rowId, model->fieldIndex("to_who"))).toString();
+    if (!ui->zad->findText(toWho)) {
+        ui->zad->addItem(toWho);
+    }
+}
 void MainWindow::on_pushButton_2_clicked()
 {
     model->removeRow(rowId, QModelIndex());
 }
+
+void MainWindow::setupzad()
+{
+    // Очистите текущие элементы в zad
+    ui->zad->clear();
+    QSqlQuery query("SELECT DISTINCT to_who FROM ToolTransfers");
+    while (query.next()) {
+        QString toWho = query.value(0).toString();
+        ui->zad->addItem(toWho); // Добавьте элемент в zad
+    }
+}
+
 
 MainWindow::~MainWindow()
 {

@@ -37,6 +37,7 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QCheckBox *radioButton;
+    QComboBox *zad;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -78,6 +79,9 @@ public:
         radioButton = new QCheckBox(scrollAreaWidgetContents);
         radioButton->setObjectName("radioButton");
         radioButton->setGeometry(QRect(390, 10, 78, 22));
+        zad = new QComboBox(scrollAreaWidgetContents);
+        zad->setObjectName("zad");
+        zad->setGeometry(QRect(410, 60, 72, 24));
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         verticalLayout->addWidget(scrollArea);

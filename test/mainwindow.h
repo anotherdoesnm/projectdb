@@ -31,6 +31,8 @@ private:
     void setupModel();
     void updateToolDisplay();
 
+    void setupzad();
+
     int rowId;
     Ui::MainWindow *ui;
     QSqlRelationalTableModel *model;
