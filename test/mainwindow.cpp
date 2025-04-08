@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(ui->radioButton, &QRadioButton::toggled, this, &MainWindow::on_radioButton_toggled);
-    connect(ui->zad, &QComboBox::currentTextChanged, this, &MainWindow::on_comboBox_currentTextChanged);
+    // connect(ui->zad, &QComboBox::currentTextChanged, this, &MainWindow::on_comboBox_currentTextChanged);
     setupDatabase();
     setupModel();
     setupzad();
@@ -135,9 +135,11 @@ void MainWindow::addTransferHistory()
 {
     // Создаем новую запись для истории переводов
     QSqlQuery query;
-    query.prepare("INSERT INTO TransferHistory (to_who, transfer_date) VALUES (:to_who, :date)");
+    query.prepare("INSERT INTO TransferHistory (from_who, transfer_date, to_who,tool_id) VALUES (:to_who, :date, :to_whoo,:tool_id)");
     query.bindValue(":to_who", this->selectedToWho);
     query.bindValue(":date", QDate::currentDate());
+    query.bindValue(":to_whoo", this->to_whoo);
+    query.bindValue(":tool_id", this->tool_id);
 
     if (!query.exec()) {
         qDebug() << "Error adding to TransferHistory:" << query.lastError().text();
@@ -152,3 +154,16 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_zad_currentTextChanged(const QString &arg1)
+{
+    to_whoo = arg1;
+    QSqlQuery q;
+    q.prepare("select tool_id from ToolTransfers where to_who = ':arg1';");
+    q.bindValue(":arg1",arg1);
+    q.exec();
+    int tid = q.value("tool_id").toInt();
+    qDebug() << tid;
+    this->tool_id = tid;
+}
+

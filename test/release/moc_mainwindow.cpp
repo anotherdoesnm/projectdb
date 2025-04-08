@@ -48,7 +48,8 @@ static constexpr auto qt_meta_stringdata_ZN10MainWindowE = QtMocHelpers::stringD
     "index",
     "on_pushButton_2_clicked",
     "on_radioButton_toggled",
-    "checked"
+    "checked",
+    "on_zad_currentTextChanged"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -60,7 +61,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10MainWindowE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -68,12 +69,13 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10MainWindowE[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   50,    2, 0x08,    1 /* Private */,
-       4,    0,   53,    2, 0x08,    3 /* Private */,
-       5,    0,   54,    2, 0x08,    4 /* Private */,
-       6,    1,   55,    2, 0x08,    5 /* Private */,
-       9,    0,   58,    2, 0x08,    7 /* Private */,
-      10,    1,   59,    2, 0x08,    8 /* Private */,
+       1,    1,   56,    2, 0x08,    1 /* Private */,
+       4,    0,   59,    2, 0x08,    3 /* Private */,
+       5,    0,   60,    2, 0x08,    4 /* Private */,
+       6,    1,   61,    2, 0x08,    5 /* Private */,
+       9,    0,   64,    2, 0x08,    7 /* Private */,
+      10,    1,   65,    2, 0x08,    8 /* Private */,
+      12,    1,   68,    2, 0x08,   10 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -82,6 +84,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10MainWindowE[] = {
     QMetaType::Void, 0x80000000 | 7,    8,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Bool,   11,
+    QMetaType::Void, QMetaType::QString,    3,
 
        0        // eod
 };
@@ -109,7 +112,10 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_radioButton_toggled'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<bool, std::false_type>
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        // method 'on_zad_currentTextChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
     >,
     nullptr
 } };
@@ -125,6 +131,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->on_tableView_clicked((*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[1]))); break;
         case 4: _t->on_pushButton_2_clicked(); break;
         case 5: _t->on_radioButton_toggled((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 6: _t->on_zad_currentTextChanged((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         default: ;
         }
     }
@@ -149,14 +156,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }
