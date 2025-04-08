@@ -40,6 +40,7 @@ private:
     int rowId;
     Ui::MainWindow *ui;
     QSqlRelationalTableModel *model;
+    QString from_whoo;
     QString to_whoo;
     int tool_id;
     void loadData(const QString &tableName);

@@ -107,7 +107,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
     rowId = index.row();
 
     QString toWho = model->data(model->index(rowId, model->fieldIndex("to_who"))).toString();
-
+    // from_whoo = model->data(model->index(rowId, model->fieldIndex("from_who"))).toString();
     // Сохраняем значение для дальнейшего использования
     selectedToWho = toWho;
 
@@ -146,7 +146,22 @@ void MainWindow::addTransferHistory()
         qDebug() << QDate::currentDate();
     } else {
         qDebug() << "Transfer history entry added successfully.";
+        // UPDATE OR INSERT ToolTransfers SET from_who = to_who, to_who = to_whoo WHERE tool_id = tool_id;
+        QSqlQuery updateQuery;
+        updateQuery.prepare("INSERT INTO ToolTransfers (from_who, to_who, tool_id) VALUES (:from_who, :to_who, :tool_id) "
+                            "ON DUPLICATE KEY UPDATE from_who = :from_who, to_who = :to_who, tool_id = :tool_id");
+        // Bind the parameters correctly
+        updateQuery.bindValue(":from_who", this->selectedToWho); // Assuming this is the correct value for from_who
+        updateQuery.bindValue(":to_who", this->to_whoo); // Corrected parameter name
+        updateQuery.bindValue(":tool_id", this->tool_id);
+
+        if (!updateQuery.exec()) {
+            qDebug() << "Error updating ToolTransfers:" << updateQuery.lastError().text();
+        } else {
+            qDebug() << "ToolTransfers updated successfully.";
+        }
     }
+
 }
 
 
@@ -159,9 +174,11 @@ void MainWindow::on_zad_currentTextChanged(const QString &arg1)
 {
     to_whoo = arg1;
     QSqlQuery q;
-    q.prepare("select tool_id from ToolTransfers where to_who = ':arg1';");
-    q.bindValue(":arg1",arg1);
+    q.prepare("select tool_id from ToolTransfers where to_who = :arg1;");
+    q.bindValue(":arg1",this->selectedToWho);
+
     q.exec();
+    q.next();
     int tid = q.value("tool_id").toInt();
     qDebug() << tid;
     this->tool_id = tid;
