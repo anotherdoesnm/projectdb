@@ -132,7 +132,6 @@ void MainWindow::setupzad()
 
 void MainWindow::addTransferHistory()
 {
-    // Создаем новую запись для истории переводов
     QSqlQuery query;
     query.prepare("INSERT INTO TransferHistory (from_who, transfer_date, to_who,tool_id) VALUES (:to_who, :date, :to_whoo,:tool_id)");
     query.bindValue(":to_who", this->selectedToWho);
@@ -151,13 +150,9 @@ void MainWindow::addTransferHistory()
         // Bind the parameters correctly
         updateQuery.bindValue(":from_who", this->selectedToWho); // Assuming this is the correct value for from_who
         updateQuery.bindValue(":to_who", this->to_whoo); // Corrected parameter name
-        updateQuery.bindValue(":tool_id", this->tool_id);
+        updateQuery.bindValue(":tool_id", this->id);
         updateQuery.bindValue(":id",this->id);
         updateQuery.bindValue(":transfer_date",QDate::currentDate());
-        // qDebug() << "Updating tool transfers";
-        // qDebug() << this->selectedToWho;
-        // qDebug() << this->to_whoo;
-        // qDebug() << this->tool_id;
         if (!updateQuery.exec()) {
             qDebug() << "Error updating ToolTransfers:" << updateQuery.lastError().text();
         } else {
