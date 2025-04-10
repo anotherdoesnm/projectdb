@@ -10,19 +10,37 @@
     <height>647</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>992</width>
+    <height>647</height>
+   </size>
+  </property>
   <property name="maximumSize">
    <size>
     <width>992</width>
-    <height>16777215</height>
+    <height>647</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>Qt + GCC/G++ Template</string>
+   <string>ProjectDB</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QScrollArea" name="scrollArea">
+      <property name="minimumSize">
+       <size>
+        <width>974</width>
+        <height>607</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>974</width>
+        <height>607</height>
+       </size>
+      </property>
       <property name="widgetResizable">
        <bool>true</bool>
       </property>
@@ -125,12 +143,12 @@
          <rect>
           <x>400</x>
           <y>0</y>
-          <width>78</width>
+          <width>191</width>
           <height>22</height>
          </rect>
         </property>
         <property name="text">
-         <string>CheckBox</string>
+         <string>Показать имена предметов</string>
         </property>
        </widget>
        <widget class="QComboBox" name="zad">

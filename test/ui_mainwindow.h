@@ -45,13 +45,16 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
         MainWindow->resize(992, 647);
-        MainWindow->setMaximumSize(QSize(992, 16777215));
+        MainWindow->setMinimumSize(QSize(992, 647));
+        MainWindow->setMaximumSize(QSize(992, 647));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         verticalLayout = new QVBoxLayout(centralwidget);
         verticalLayout->setObjectName("verticalLayout");
         scrollArea = new QScrollArea(centralwidget);
         scrollArea->setObjectName("scrollArea");
+        scrollArea->setMinimumSize(QSize(974, 607));
+        scrollArea->setMaximumSize(QSize(974, 607));
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
@@ -78,7 +81,7 @@ public:
         pushButton_2->setGeometry(QRect(300, 10, 80, 24));
         radioButton = new QCheckBox(scrollAreaWidgetContents);
         radioButton->setObjectName("radioButton");
-        radioButton->setGeometry(QRect(400, 0, 78, 22));
+        radioButton->setGeometry(QRect(400, 0, 191, 22));
         zad = new QComboBox(scrollAreaWidgetContents);
         zad->setObjectName("zad");
         zad->setGeometry(QRect(400, 20, 221, 21));
@@ -99,7 +102,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Qt + GCC/G++ Template", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "ProjectDB", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "Person", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "GardenTools", nullptr));
         comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "ToolTransfers", nullptr));
@@ -108,7 +111,7 @@ public:
         saveButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\236\320\245\320\240\320\220\320\235\320\230\320\242\320\254", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\236\320\227\320\224\320\220\320\242\320\254", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "\320\243\320\224\320\220\320\233\320\230\320\242\320\254", nullptr));
-        radioButton->setText(QCoreApplication::translate("MainWindow", "CheckBox", nullptr));
+        radioButton->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\270\320\274\320\265\320\275\320\260 \320\277\321\200\320\265\320\264\320\274\320\265\321\202\320\276\320\262", nullptr));
     } // retranslateUi
 
 };

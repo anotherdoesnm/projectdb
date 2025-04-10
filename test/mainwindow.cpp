@@ -133,6 +133,7 @@ void MainWindow::setupzad()
 void MainWindow::addTransferHistory()
 {
     QSqlQuery query;
+    if(this->from_whoo == "" || this->selectedToWho == "") return;
     query.prepare("INSERT INTO TransferHistory (from_who, transfer_date, to_who,tool_id) VALUES (:to_who, :date, :to_whoo,:tool_id)");
     query.bindValue(":to_who", this->selectedToWho);
     query.bindValue(":date", QDate::currentDate());
@@ -159,7 +160,8 @@ void MainWindow::addTransferHistory()
             qDebug() << "ToolTransfers updated successfully.";
         }
     }
-
+    this->from_whoo = "";
+    this->selectedToWho = "";
 }
 
 
