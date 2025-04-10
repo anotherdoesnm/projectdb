@@ -43,6 +43,7 @@ private:
     QString from_whoo;
     QString to_whoo;
     int tool_id;
+    int id;
     void loadData(const QString &tableName);
 }; // Это функция, которая загружает данные из базы данных в модель данных (QSqlTableModel) на основе имени таблицы (tableName).
     // Параметр tableName представляет собой имя таблицы, данные из которой необходимо загрузить.

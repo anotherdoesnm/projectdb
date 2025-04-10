@@ -13,7 +13,6 @@
 #include <QSqlRelationalTableModel>
 #include <QRadioButton>
 #include <QCheckBox>
-
 #include <QDate>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -148,13 +147,17 @@ void MainWindow::addTransferHistory()
         qDebug() << "Transfer history entry added successfully.";
         // UPDATE OR INSERT ToolTransfers SET from_who = to_who, to_who = to_whoo WHERE tool_id = tool_id;
         QSqlQuery updateQuery;
-        updateQuery.prepare("INSERT INTO ToolTransfers (from_who, to_who, tool_id) VALUES (:from_who, :to_who, :tool_id) "
-                            "ON DUPLICATE KEY UPDATE from_who = :from_who, to_who = :to_who, tool_id = :tool_id");
+        updateQuery.prepare("INSERT OR REPLACE INTO ToolTransfers (id,from_who, to_who, tool_id,transfer_date) VALUES (:id,:from_who, :to_who, :tool_id,:transfer_date);");
         // Bind the parameters correctly
         updateQuery.bindValue(":from_who", this->selectedToWho); // Assuming this is the correct value for from_who
         updateQuery.bindValue(":to_who", this->to_whoo); // Corrected parameter name
         updateQuery.bindValue(":tool_id", this->tool_id);
-
+        updateQuery.bindValue(":id",this->id);
+        updateQuery.bindValue(":transfer_date",QDate::currentDate());
+        // qDebug() << "Updating tool transfers";
+        // qDebug() << this->selectedToWho;
+        // qDebug() << this->to_whoo;
+        // qDebug() << this->tool_id;
         if (!updateQuery.exec()) {
             qDebug() << "Error updating ToolTransfers:" << updateQuery.lastError().text();
         } else {
@@ -174,13 +177,13 @@ void MainWindow::on_zad_currentTextChanged(const QString &arg1)
 {
     to_whoo = arg1;
     QSqlQuery q;
-    q.prepare("select tool_id from ToolTransfers where to_who = :arg1;");
+    q.prepare("select id, tool_id from ToolTransfers where to_who = :arg1;");
     q.bindValue(":arg1",this->selectedToWho);
-
+    if(ui->comboBox->currentText() != "ToolTransfers") return;
     q.exec();
     q.next();
     int tid = q.value("tool_id").toInt();
-    qDebug() << tid;
+    this->id = q.value("id").toInt();
     this->tool_id = tid;
 }
 
