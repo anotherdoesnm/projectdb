@@ -15,6 +15,8 @@
 #include <QCheckBox>
 #include <QDate>
 
+#include <QMessageBox>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -26,6 +28,15 @@ MainWindow::MainWindow(QWidget *parent)
     setupModel();
     setupzad();
     ui->tableView->setModel(model);
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Дратути!");
+    msgBox.setText("Происходит нечто необычное! Запомни мудрость - чтобы передать вещ другому челу, выбери чела в таблице тултрансферс , в колонне справа, у которого эта вещ есть, и второй чел который её получит, его надо выбрать в выпадающем списочке сверху, понятно да?");
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.exec();
+
+    qDebug() << "Происходит нечто необычное!";
 }
 
 void MainWindow::setupDatabase()
@@ -54,7 +65,7 @@ void MainWindow::on_radioButton_toggled(bool checked)
 {
     QString currentTable = ui->comboBox->currentText();
     int toolIdIndex = model->fieldIndex("tool_id");
-    if(currentTable == "ToolTransfers"){
+    if(currentTable == "ToolTransfers" || currentTable == "TransferHistory"){
     if (checked) {
                 model->setRelation(toolIdIndex, QSqlRelation("GardenTools", "id", "type"));
                 model->select();
@@ -62,7 +73,6 @@ void MainWindow::on_radioButton_toggled(bool checked)
         //model->setRelation(toolIdIndex, QSqlRelation());
         model->setTable("ToolTransfers");
         model->select();
-
     }
     ui->tableView->setModel(model);
     ui->tableView->reset();
@@ -72,12 +82,13 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
 {
     model->setTable(arg1);
     model->select();
-    ui->radioButton->setChecked(false);
+    ui->radioButton->setChecked(true);
 
-    if (arg1 == "TransferHistory") {
+    if (arg1 == "TransferHistory" || arg1 == "ToolTransfers") {
         ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ui->pushButton_2->setEnabled(false);
     } else {
+        ui->radioButton->setChecked(false);
         ui->tableView->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
         ui->pushButton_2->setEnabled(true);
     }
@@ -86,6 +97,7 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
         qDebug() << "Error selecting data:" << model->lastError().text();
     }
     ui->tableView->setModel(model);
+
 }
 
 void MainWindow::on_saveButton_clicked()
@@ -180,4 +192,3 @@ void MainWindow::on_zad_currentTextChanged(const QString &arg1)
     this->id = this->tool_id;
     //this->tool_id = tid;
 }
-//db updated 15 04
