@@ -106,6 +106,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
     rowId = index.row();
 
     QString toWho = model->data(model->index(rowId, model->fieldIndex("to_who"))).toString();
+    qDebug() << "Table: " << model->index(rowId, model->fieldIndex("to_who")).row();
     // from_whoo = model->data(model->index(rowId, model->fieldIndex("from_who"))).toString();
     // Сохраняем значение для дальнейшего использования
     selectedToWho = toWho;
@@ -113,6 +114,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
     if (!ui->zad->findText(toWho)) {
         ui->zad->addItem(toWho);
     }
+    this->tool_id = model->index(rowId, model->fieldIndex("to_who")).row() + 1;
 }
 void MainWindow::on_pushButton_2_clicked()
 {
@@ -133,7 +135,9 @@ void MainWindow::setupzad()
 void MainWindow::addTransferHistory()
 {
     QSqlQuery query;
-    if(this->from_whoo == "" || this->selectedToWho == "") return;
+    qDebug() << "SW: " << this->to_whoo;
+    qDebug() << "ST: " << this->selectedToWho;
+    if(this->to_whoo == "" || this->selectedToWho == "") return;
     query.prepare("INSERT INTO TransferHistory (from_who, transfer_date, to_who,tool_id) VALUES (:to_who, :date, :to_whoo,:tool_id)");
     query.bindValue(":to_who", this->selectedToWho);
     query.bindValue(":date", QDate::currentDate());
@@ -160,7 +164,7 @@ void MainWindow::addTransferHistory()
             qDebug() << "ToolTransfers updated successfully.";
         }
     }
-    this->from_whoo = "";
+    this->to_whoo = "";
     this->selectedToWho = "";
 }
 
@@ -173,14 +177,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_zad_currentTextChanged(const QString &arg1)
 {
     to_whoo = arg1;
-    QSqlQuery q;
-    q.prepare("select id, tool_id from ToolTransfers where to_who = :arg1;");
-    q.bindValue(":arg1",this->selectedToWho);
-    if(ui->comboBox->currentText() != "ToolTransfers") return;
-    q.exec();
-    q.next();
-    int tid = q.value("tool_id").toInt();
-    this->id = q.value("id").toInt();
-    this->tool_id = tid;
+    this->id = this->tool_id;
+    //this->tool_id = tid;
 }
 //db updated 15 04
