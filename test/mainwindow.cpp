@@ -183,4 +183,4 @@ void MainWindow::on_zad_currentTextChanged(const QString &arg1)
     this->id = q.value("id").toInt();
     this->tool_id = tid;
 }
-
+//db updated 15 04
