@@ -23,20 +23,34 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     setupDatabase();
+    qDebug() << "Environment USERNAME:" << QProcessEnvironment::systemEnvironment().value("USERNAME");
     QString currentUser  = QProcessEnvironment::systemEnvironment().value("USERNAME"); // For win
     // QString currentUser  = QProcessEnvironment::systemEnvironment().value("USER"); // For mac linux
-QSqlQuery query;
-query.prepare("SELECT COUNT(*) FROM Person WHERE username = :currentUser ");
- query.bindValue(":currentUser ", currentUser ); // Use the currentUser  variable
-qDebug() << "Current User:" << currentUser ; // Debug output
-    if (query.exec() && query.next()) {
+    QSqlQuery query;
+    query.prepare("SELECT * FROM Person WHERE TRIM(FIO) = TRIM(:currentUser)");
+    qDebug() << currentUser;
+    query.bindValue(":currentUser", currentUser); // Use the currentUser  variable
+    qDebug() << "Current User:" << currentUser; // Debug output
+    QSqlQuery allUsersQuery("SELECT FIO FROM Person");
+    while (allUsersQuery.next()) {
+        QString fio = allUsersQuery.value(0).toString();
+        qDebug() << "FIO in database:" << fio; // Print each FIO in the database
+    }
+    if (query.exec()) {
+        if (query.next()) {
             int count = query.value(0).toInt();
+            qDebug() << "User match count:" << count; // Debug output for user match count
             if (count > 0) {
-                qDebug() << "User  exists in the Person table.";
+                qDebug() << "User exists in the Person table.";
             } else {
-                qDebug() << "User  does not exist.";
+                qDebug() << "User does not exist.";
             }
+        } else {
+            qDebug() << "No results returned from the query.";
         }
+    } else {
+        qDebug() << "Query execution failed:" << query.lastError().text(); // Debug output for query error
+    }
     ui->setupUi(this);
     connect(ui->radioButton, &QRadioButton::toggled, this, &MainWindow::on_radioButton_toggled);
     // connect(ui->zad, &QComboBox::currentTextChanged, this, &MainWindow::on_comboBox_currentTextChanged);
