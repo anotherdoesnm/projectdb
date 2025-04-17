@@ -22,19 +22,14 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    setupDatabase();
     QString currentUser  = QProcessEnvironment::systemEnvironment().value("USERNAME"); // For win
     // QString currentUser  = QProcessEnvironment::systemEnvironment().value("USER"); // For mac linux
-
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // Change to your database type
-    db.setDatabaseName("test.db");
-
-    if (db.open()) {
-        QSqlQuery query;
-        query.prepare("SELECT COUNT(*) FROM Person WHERE username = :currentUser ");
-        query.bindValue(":currentUser ", currentUser ); // Use the currentUser  variable
-        qDebug() << "Current User:" << currentUser ; // Debug output
-
-        if (query.exec() && query.next()) {
+QSqlQuery query;
+query.prepare("SELECT COUNT(*) FROM Person WHERE username = :currentUser ");
+ query.bindValue(":currentUser ", currentUser ); // Use the currentUser  variable
+qDebug() << "Current User:" << currentUser ; // Debug output
+    if (query.exec() && query.next()) {
             int count = query.value(0).toInt();
             if (count > 0) {
                 qDebug() << "User  exists in the Person table.";
@@ -42,14 +37,9 @@ MainWindow::MainWindow(QWidget *parent)
                 qDebug() << "User  does not exist.";
             }
         }
-        db.close();
-    } else {
-        qDebug() << "Database connection failed.";
-    }
     ui->setupUi(this);
     connect(ui->radioButton, &QRadioButton::toggled, this, &MainWindow::on_radioButton_toggled);
     // connect(ui->zad, &QComboBox::currentTextChanged, this, &MainWindow::on_comboBox_currentTextChanged);
-    setupDatabase();
     setupModel();
     setupzad();
     ui->tableView->setModel(model);
@@ -60,8 +50,6 @@ MainWindow::MainWindow(QWidget *parent)
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.setDefaultButton(QMessageBox::Ok);
     msgBox.exec();
-
-    qDebug() << "Происходит нечто необычное!";
 }
 
 void MainWindow::setupDatabase()
