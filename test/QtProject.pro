@@ -18,4 +18,7 @@ QMAKE_CC = gcc
 QMAKE_LINK = g++
 
 # Добавляем флаги компиляции
-QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic
+QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -lsqlcipher
+
+INCLUDEPATH += C:/sqlcipher/include
+LIBS += -LC:/sqlcipher/lib -lsqlcipher

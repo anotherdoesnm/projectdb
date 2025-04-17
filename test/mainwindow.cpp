@@ -18,16 +18,51 @@
 #include <QMessageBox>
 #include <QProcessEnvironment>
 
+#include <QInputDialog>
+#include <QLineEdit>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     setupDatabase();
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+
+    db.setDatabaseName("test.db");
+    if (!db.open()) {
+        qDebug() << "Error: Unable to open the database.";
+        qDebug() << db.lastError().text();
+        return;
+    } else {
+        qDebug() << "Error: шта то база открывается";
+    }
+
+    bool ok;
+    QString encryptionKey = QInputDialog::getText(nullptr, "Пароль БД ",
+                                                  "Enter your encryption key:", QLineEdit::Password,
+                                                  "", &ok);
+    qDebug() << encryptionKey;
+    if (ok && !encryptionKey.isEmpty()) {
+        QSqlQuery query;
+        query.exec(QString("PRAGMA key = '%1'").arg(encryptionKey));
+
+        if (!query.exec("SELECT 1;")) {
+            qDebug() << "Error: Incorrect encryption key.";
+            qDebug() << query.lastError().text();
+            db.close();
+            return;
+        } else {
+            qDebug() << "Database opened successfully with the provided key!";
+        }
+    }
+
     qDebug() << "Environment USERNAME:" << QProcessEnvironment::systemEnvironment().value("USERNAME");
     QString currentUser  = QProcessEnvironment::systemEnvironment().value("USERNAME"); // For win
     // QString currentUser  = QProcessEnvironment::systemEnvironment().value("USER"); // For mac linux
     QSqlQuery query;
-    query.prepare("SELECT * FROM Person WHERE TRIM(FIO) = TRIM(:currentUser)");
+    query.prepare("SELECT * FROM Person WHERE FIO = (:currentUser)");
     qDebug() << currentUser;
     query.bindValue(":currentUser", currentUser); // Use the currentUser  variable
     qDebug() << "Current User:" << currentUser; // Debug output

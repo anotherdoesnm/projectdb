@@ -15,11 +15,11 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DQT_DESIGNER_LIB -DQT_UIPLUGIN_LIB -DQT_UITOOLS_LIB -DQT_OPENGLWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_CORE_LIB
 CFLAGS        = -fno-keep-inline-dllexport -march=nocona -msahf -mtune=generic -Wa,-mbig-obj -g -Wall -Wextra -Wextra $(DEFINES)
-CXXFLAGS      = -fno-keep-inline-dllexport -march=nocona -msahf -mtune=generic -Wa,-mbig-obj -Wall -Wextra -Wpedantic -g -std=gnu++1z -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I. -IC:/msys64/mingw64/include/qt6 -IC:/msys64/mingw64/include/qt6/QtDesigner -IC:/msys64/mingw64/include/qt6/QtUiPlugin -IC:/msys64/mingw64/include/qt6/QtUiTools -IC:/msys64/mingw64/include/qt6/QtOpenGLWidgets -IC:/msys64/mingw64/include/qt6/QtWidgets -IC:/msys64/mingw64/include/qt6/QtOpenGL -IC:/msys64/mingw64/include/qt6/QtGui -IC:/msys64/mingw64/include/qt6/QtXml -IC:/msys64/mingw64/include/qt6/QtSql -IC:/msys64/mingw64/include/qt6/QtCore -Idebug -I. -I/include -IC:/msys64/mingw64/share/qt6/mkspecs/win32-g++ 
+CXXFLAGS      = -fno-keep-inline-dllexport -march=nocona -msahf -mtune=generic -Wa,-mbig-obj -Wall -Wextra -Wpedantic -lsqlcipher -g -std=gnu++1z -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
+INCPATH       = -I. -IC:/sqlcipher/include -IC:/msys64/mingw64/include/qt6 -IC:/msys64/mingw64/include/qt6/QtDesigner -IC:/msys64/mingw64/include/qt6/QtUiPlugin -IC:/msys64/mingw64/include/qt6/QtUiTools -IC:/msys64/mingw64/include/qt6/QtOpenGLWidgets -IC:/msys64/mingw64/include/qt6/QtWidgets -IC:/msys64/mingw64/include/qt6/QtOpenGL -IC:/msys64/mingw64/include/qt6/QtGui -IC:/msys64/mingw64/include/qt6/QtXml -IC:/msys64/mingw64/include/qt6/QtSql -IC:/msys64/mingw64/include/qt6/QtCore -Idebug -I. -I/include -IC:/msys64/mingw64/share/qt6/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,console -mthreads
-LIBS        =        C:\msys64\mingw64\lib\libQt6Designer.dll.a C:\msys64\mingw64\lib\libQt6UiTools.dll.a C:\msys64\mingw64\lib\libQt6OpenGLWidgets.dll.a C:\msys64\mingw64\lib\libQt6Widgets.dll.a C:\msys64\mingw64\lib\libQt6OpenGL.dll.a C:\msys64\mingw64\lib\libQt6Gui.dll.a C:\msys64\mingw64\lib\libQt6Xml.dll.a C:\msys64\mingw64\lib\libQt6Sql.dll.a C:\msys64\mingw64\lib\libQt6Core.dll.a   
+LIBS        =        -LC:\sqlcipher\lib -lsqlcipher C:\msys64\mingw64\lib\libQt6Designer.dll.a C:\msys64\mingw64\lib\libQt6UiTools.dll.a C:\msys64\mingw64\lib\libQt6OpenGLWidgets.dll.a C:\msys64\mingw64\lib\libQt6Widgets.dll.a C:\msys64\mingw64\lib\libQt6OpenGL.dll.a C:\msys64\mingw64\lib\libQt6Gui.dll.a C:\msys64\mingw64\lib\libQt6Xml.dll.a C:\msys64\mingw64\lib\libQt6Sql.dll.a C:\msys64\mingw64\lib\libQt6Core.dll.a   
 QMAKE         = C:\msys64\mingw64\bin\qmake6.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -103,7 +103,7 @@ compiler_moc_predefs_make_all: debug/moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) debug\moc_predefs.h
 debug/moc_predefs.h: C:/msys64/mingw64/share/qt6/mkspecs/features/data/dummy.cpp
-	g++ -fno-keep-inline-dllexport -march=nocona -msahf -mtune=generic -Wa,-mbig-obj -Wall -Wextra -Wpedantic -g -std=gnu++1z -Wall -Wextra -Wextra -dM -E -o debug\moc_predefs.h C:\msys64\mingw64\share\qt6\mkspecs\features\data\dummy.cpp
+	g++ -fno-keep-inline-dllexport -march=nocona -msahf -mtune=generic -Wa,-mbig-obj -Wall -Wextra -Wpedantic -lsqlcipher -g -std=gnu++1z -Wall -Wextra -Wextra -dM -E -o debug\moc_predefs.h C:\msys64\mingw64\share\qt6\mkspecs\features\data\dummy.cpp
 
 compiler_moc_header_make_all: debug/moc_mainwindow.cpp
 compiler_moc_header_clean:
@@ -111,7 +111,7 @@ compiler_moc_header_clean:
 debug/moc_mainwindow.cpp: mainwindow.h \
 		debug/moc_predefs.h \
 		C:/msys64/mingw64/share/qt6/bin/moc.exe
-	C:\msys64\mingw64\share\qt6\bin\moc.exe $(DEFINES) --include C:/Users/Student04/Documents/GitHub/projectdb/test/debug/moc_predefs.h -IC:/msys64/mingw64/share/qt6/mkspecs/win32-g++ -IC:/Users/Student04/Documents/GitHub/projectdb/test -IC:/msys64/mingw64/include/qt6 -IC:/msys64/mingw64/include/qt6/QtDesigner -IC:/msys64/mingw64/include/qt6/QtUiPlugin -IC:/msys64/mingw64/include/qt6/QtUiTools -IC:/msys64/mingw64/include/qt6/QtOpenGLWidgets -IC:/msys64/mingw64/include/qt6/QtWidgets -IC:/msys64/mingw64/include/qt6/QtOpenGL -IC:/msys64/mingw64/include/qt6/QtGui -IC:/msys64/mingw64/include/qt6/QtXml -IC:/msys64/mingw64/include/qt6/QtSql -IC:/msys64/mingw64/include/qt6/QtCore -IC:/msys64/mingw64/include/c++/14.2.0 -IC:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32 -IC:/msys64/mingw64/include/c++/14.2.0/backward -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed mainwindow.h -o debug\moc_mainwindow.cpp
+	C:\msys64\mingw64\share\qt6\bin\moc.exe $(DEFINES) --include C:/Users/Student04/Documents/GitHub/projectdb/test/debug/moc_predefs.h -IC:/msys64/mingw64/share/qt6/mkspecs/win32-g++ -IC:/Users/Student04/Documents/GitHub/projectdb/test -IC:/sqlcipher/include -IC:/msys64/mingw64/include/qt6 -IC:/msys64/mingw64/include/qt6/QtDesigner -IC:/msys64/mingw64/include/qt6/QtUiPlugin -IC:/msys64/mingw64/include/qt6/QtUiTools -IC:/msys64/mingw64/include/qt6/QtOpenGLWidgets -IC:/msys64/mingw64/include/qt6/QtWidgets -IC:/msys64/mingw64/include/qt6/QtOpenGL -IC:/msys64/mingw64/include/qt6/QtGui -IC:/msys64/mingw64/include/qt6/QtXml -IC:/msys64/mingw64/include/qt6/QtSql -IC:/msys64/mingw64/include/qt6/QtCore -IC:/msys64/mingw64/include/c++/14.2.0 -IC:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32 -IC:/msys64/mingw64/include/c++/14.2.0/backward -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed mainwindow.h -o debug\moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
