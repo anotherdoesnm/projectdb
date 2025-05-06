@@ -27,19 +27,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     setupDatabase();
-
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-
-
-    db.setDatabaseName("test.db");
-    if (!db.open()) {
-        qDebug() << "Error: Unable to open the database.";
-        qDebug() << db.lastError().text();
-        return;
-    } else {
-        qDebug() << "Error: шта то база открывается";
-    }
-
     bool ok;
     QString encryptionKey = QInputDialog::getText(nullptr, "Пароль БД ",
                                                   "Происходит нечто необычное!\nЗапомни мудрость - чтобы передать вещ другому челу, выбери чела в таблице тултрансферс, в колонне справа, у которого эта вещ есть, и второй чел который её получит, его надо выбрать в выпадающем списочке сверху, понятно да?\nА теперь вводи сука пароль", QLineEdit::Password,
@@ -52,7 +39,6 @@ MainWindow::MainWindow(QWidget *parent)
         if (!query.exec("SELECT 1;")) {
             qDebug() << "Error: Incorrect encryption key.";
             qDebug() << query.lastError().text();
-            db.close();
             return;
         } else {
             qDebug() << "Database opened successfully with the provided key!";

@@ -31,3 +31,9 @@ void Dialog::on_comboBox_currentTextChanged(const QString &arg1)
     }
 }
 
+
+void Dialog::on_buttonBox_accepted()
+{
+
+}
+
