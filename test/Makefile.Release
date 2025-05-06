@@ -19,7 +19,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -march=nocona -msahf -mtune=generic -
 INCPATH       = -I. -I/mingw64/include -I../../../msys64/mingw64/include/qt6 -I../../../msys64/mingw64/include/qt6/QtDesigner -I../../../msys64/mingw64/include/qt6/QtUiPlugin -I../../../msys64/mingw64/include/qt6/QtUiTools -I../../../msys64/mingw64/include/qt6/QtOpenGLWidgets -I../../../msys64/mingw64/include/qt6/QtWidgets -I../../../msys64/mingw64/include/qt6/QtOpenGL -I../../../msys64/mingw64/include/qt6/QtGui -I../../../msys64/mingw64/include/qt6/QtXml -I../../../msys64/mingw64/include/qt6/QtSql -I../../../msys64/mingw64/include/qt6/QtCore -Irelease -I. -I/include -I../../../msys64/mingw64/share/qt6/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,console -mthreads
-LIBS        =        -L/mingw64/lib -lsqlcipher C:/msys64/mingw64/lib/libQt6Designer.dll.a C:/msys64/mingw64/lib/libQt6UiTools.dll.a C:/msys64/mingw64/lib/libQt6OpenGLWidgets.dll.a C:/msys64/mingw64/lib/libQt6Widgets.dll.a C:/msys64/mingw64/lib/libQt6OpenGL.dll.a C:/msys64/mingw64/lib/libQt6Gui.dll.a C:/msys64/mingw64/lib/libQt6Xml.dll.a C:/msys64/mingw64/lib/libQt6Sql.dll.a C:/msys64/mingw64/lib/libQt6Core.dll.a   
+LIBS        =        -L/mingw64/lib C:/msys64/mingw64/lib/libQt6Designer.dll.a C:/msys64/mingw64/lib/libQt6UiTools.dll.a C:/msys64/mingw64/lib/libQt6OpenGLWidgets.dll.a C:/msys64/mingw64/lib/libQt6Widgets.dll.a C:/msys64/mingw64/lib/libQt6OpenGL.dll.a C:/msys64/mingw64/lib/libQt6Gui.dll.a C:/msys64/mingw64/lib/libQt6Xml.dll.a C:/msys64/mingw64/lib/libQt6Sql.dll.a C:/msys64/mingw64/lib/libQt6Core.dll.a   
 QMAKE         = C:/msys64/mingw64/bin/qmake6.exe
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -941,7 +941,45 @@ release/dialog.o: dialog.cpp dialog.h \
 		../../../msys64/mingw64/include/qt6/QtGui/qinputmethod.h \
 		../../../msys64/mingw64/include/qt6/QtCore/qlocale.h \
 		../../../msys64/mingw64/include/qt6/QtGui/qguiapplication_platform.h \
-		ui_dialog.h
+		ui_dialog.h \
+		../../../msys64/mingw64/include/qt6/QtCore/QVariant \
+		../../../msys64/mingw64/include/qt6/QtWidgets/QAbstractButton \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qabstractbutton.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/QApplication \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qapplication.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/QComboBox \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qcombobox.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qabstractitemdelegate.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qstyleoption.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qabstractspinbox.h \
+		../../../msys64/mingw64/include/qt6/QtGui/qvalidator.h \
+		../../../msys64/mingw64/include/qt6/QtCore/qregularexpression.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qslider.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qabstractslider.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qstyle.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qtabbar.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qtabwidget.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qrubberband.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qframe.h \
+		../../../msys64/mingw64/include/qt6/QtCore/qabstractitemmodel.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/QDialogButtonBox \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qdialogbuttonbox.h \
+		../../../msys64/mingw64/include/qt6/QtWidgets/QLabel \
+		../../../msys64/mingw64/include/qt6/QtWidgets/qlabel.h \
+		../../../msys64/mingw64/include/qt6/QtGui/qpicture.h \
+		../../../msys64/mingw64/include/qt6/QtGui/qtextdocument.h \
+		../../../msys64/mingw64/include/qt6/QtSql/QSqlQuery \
+		../../../msys64/mingw64/include/qt6/QtSql/qsqlquery.h \
+		../../../msys64/mingw64/include/qt6/QtSql/qtsqlglobal.h \
+		../../../msys64/mingw64/include/qt6/QtSql/qtsql-config.h \
+		../../../msys64/mingw64/include/qt6/QtSql/qtsqlexports.h \
+		../../../msys64/mingw64/include/qt6/QtSql/qsqldatabase.h \
+		../../../msys64/mingw64/include/qt6/QtCore/qmetaobject.h \
+		../../../msys64/mingw64/include/qt6/QtCore/QDate \
+		../../../msys64/mingw64/include/qt6/QtCore/qdatetime.h \
+		../../../msys64/mingw64/include/qt6/QtCore/qcalendar.h \
+		../../../msys64/mingw64/include/qt6/QtSql/QSqlError \
+		../../../msys64/mingw64/include/qt6/QtSql/qsqlerror.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/dialog.o dialog.cpp
 
 release/mainwindow.o: mainwindow.cpp mainwindow.h \

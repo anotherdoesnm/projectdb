@@ -25,4 +25,4 @@ QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic
 
 # Include SQLCipher
 INCLUDEPATH += /mingw64/include  # Adjust if using 32-bit
-LIBS += -L/mingw64/lib -lsqlcipher  # Adjust if using 32-bit
+LIBS += -L/mingw64/lib  # Adjust if using 32-bit

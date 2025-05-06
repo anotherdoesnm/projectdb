@@ -17,8 +17,8 @@ public:
 
 private slots:
     void on_comboBox_currentTextChanged(const QString &arg1);
-
     void on_buttonBox_accepted();
+    void addTransferHistory();
 
 private:
     Ui::Dialog *ui;
