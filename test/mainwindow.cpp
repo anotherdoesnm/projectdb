@@ -20,7 +20,7 @@
 
 #include <QInputDialog>
 #include <QLineEdit>
-
+#include "dialog.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupDatabase();
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+
 
     db.setDatabaseName("test.db");
     if (!db.open()) {
@@ -41,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     bool ok;
     QString encryptionKey = QInputDialog::getText(nullptr, "Пароль БД ",
-                                                  "Enter your encryption key:", QLineEdit::Password,
+                                                  "Происходит нечто необычное!\nЗапомни мудрость - чтобы передать вещ другому челу, выбери чела в таблице тултрансферс, в колонне справа, у которого эта вещ есть, и второй чел который её получит, его надо выбрать в выпадающем списочке сверху, понятно да?\nА теперь вводи сука пароль", QLineEdit::Password,
                                                   "", &ok);
     qDebug() << encryptionKey;
     if (ok && !encryptionKey.isEmpty()) {
@@ -92,18 +93,12 @@ MainWindow::MainWindow(QWidget *parent)
     setupModel();
     setupzad();
     ui->tableView->setModel(model);
-
-    QMessageBox msgBox;
-    msgBox.setWindowTitle("Дратути!");
-    msgBox.setText("Происходит нечто необычное! Запомни мудрость - чтобы передать вещ другому челу, выбери чела в таблице тултрансферс , в колонне справа, у которого эта вещ есть, и второй чел который её получит, его надо выбрать в выпадающем списочке сверху, понятно да?");
-    msgBox.setStandardButtons(QMessageBox::Ok);
-    msgBox.setDefaultButton(QMessageBox::Ok);
-    msgBox.exec();
 }
 
 void MainWindow::setupDatabase()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setPassword("1");
     db.setDatabaseName("test.db");
     if (!db.open()) {
         qDebug() << "Database error:" << db.lastError().text();
@@ -254,3 +249,10 @@ void MainWindow::on_zad_currentTextChanged(const QString &arg1)
     this->id = this->tool_id;
     //this->tool_id = tid;
 }
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    Dialog *d = new Dialog();
+    d->show();
+}
+

@@ -6,11 +6,14 @@ TARGET = QtProject
 TEMPLATE = app
 
 SOURCES += main.cpp \
+           dialog.cpp \
            mainwindow.cpp
 
-HEADERS += mainwindow.h
+HEADERS += mainwindow.h \
+    dialog.h
 
-FORMS += mainwindow.ui
+FORMS += mainwindow.ui \
+    dialog.ui
 
 # Определяем компилятор (GCC)
 QMAKE_CXX = g++
@@ -18,7 +21,8 @@ QMAKE_CC = gcc
 QMAKE_LINK = g++
 
 # Добавляем флаги компиляции
-QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -lsqlcipher
+QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic
 
-INCLUDEPATH += C:/sqlcipher/include
-LIBS += -LC:/sqlcipher/lib -lsqlcipher
+# Include SQLCipher
+INCLUDEPATH += /mingw64/include  # Adjust if using 32-bit
+LIBS += -L/mingw64/lib -lsqlcipher  # Adjust if using 32-bit

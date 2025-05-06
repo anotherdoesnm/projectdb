@@ -28,6 +28,8 @@ private slots:
 
     void on_zad_currentTextChanged(const QString &arg1);
 
+    void on_pushButton_3_clicked();
+
 private:
     void setupDatabase();
     void setupModel();

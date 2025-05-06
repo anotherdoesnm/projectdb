@@ -38,6 +38,7 @@ public:
     QPushButton *pushButton_2;
     QCheckBox *radioButton;
     QComboBox *zad;
+    QPushButton *pushButton_3;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -86,6 +87,9 @@ public:
         zad->setObjectName("zad");
         zad->setGeometry(QRect(400, 20, 221, 21));
         zad->setMaxVisibleItems(20);
+        pushButton_3 = new QPushButton(scrollAreaWidgetContents);
+        pushButton_3->setObjectName("pushButton_3");
+        pushButton_3->setGeometry(QRect(630, 10, 161, 24));
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         verticalLayout->addWidget(scrollArea);
@@ -102,7 +106,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "ProjectDB", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "\320\237\320\240\320\220\320\255\320\232\320\242 \320\224\320\230\320\221\320\230", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "Person", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "GardenTools", nullptr));
         comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "ToolTransfers", nullptr));
@@ -112,6 +116,7 @@ public:
         pushButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\236\320\227\320\224\320\220\320\242\320\254", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "\320\243\320\224\320\220\320\233\320\230\320\242\320\254", nullptr));
         radioButton->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\270\320\274\320\265\320\275\320\260 \320\277\321\200\320\265\320\264\320\274\320\265\321\202\320\276\320\262", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("MainWindow", "\320\237\320\225\320\240\320\225\320\224\320\220\320\242\320\254 \320\222\320\225\320\251\320\252", nullptr));
     } // retranslateUi
 
 };

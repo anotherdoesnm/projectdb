@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>ProjectDB</string>
+   <string>ПРАЭКТ ДИБИ</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -162,6 +162,19 @@
         </property>
         <property name="maxVisibleItems">
          <number>20</number>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>10</y>
+          <width>161</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>ПЕРЕДАТЬ ВЕЩЪ</string>
         </property>
        </widget>
       </widget>
