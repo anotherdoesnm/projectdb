@@ -7,22 +7,26 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
            dialog.cpp \
+           exportexcel.cpp \
            mainwindow.cpp
 
 HEADERS += mainwindow.h \
-    dialog.h
+    dialog.h \
+    exportexcel.h
 
 FORMS += mainwindow.ui \
-    dialog.ui
+    dialog.ui \
+    exportexcel.ui
 
 # Определяем компилятор (GCC)
 QMAKE_CXX = g++
 QMAKE_CC = gcc
 QMAKE_LINK = g++
-
+rrr
 # Добавляем флаги компиляции
 QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic
 
 # Include SQLCipher
-INCLUDEPATH += /mingw64/include  # Adjust if using 32-bit
-LIBS += -L/mingw64/lib  # Adjust if using 32-bit
+INCLUDEPATH += /mingw64/include
+INCLUDEPATH += '/c/Program Files (x86)/OpenXLSX/include/OpenXLSX'
+LIBS += -L/mingw64/lib  -L '/c/Program Files (x86)/OpenXLSX/lib' -lopenxlsx

@@ -39,6 +39,7 @@ public:
     QCheckBox *radioButton;
     QComboBox *zad;
     QPushButton *pushButton_3;
+    QPushButton *pushButton_4;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -90,6 +91,9 @@ public:
         pushButton_3 = new QPushButton(scrollAreaWidgetContents);
         pushButton_3->setObjectName("pushButton_3");
         pushButton_3->setGeometry(QRect(630, 10, 161, 24));
+        pushButton_4 = new QPushButton(scrollAreaWidgetContents);
+        pushButton_4->setObjectName("pushButton_4");
+        pushButton_4->setGeometry(QRect(810, 10, 131, 24));
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         verticalLayout->addWidget(scrollArea);
@@ -117,6 +121,7 @@ public:
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "\320\243\320\224\320\220\320\233\320\230\320\242\320\254", nullptr));
         radioButton->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\270\320\274\320\265\320\275\320\260 \320\277\321\200\320\265\320\264\320\274\320\265\321\202\320\276\320\262", nullptr));
         pushButton_3->setText(QCoreApplication::translate("MainWindow", "\320\237\320\225\320\240\320\225\320\224\320\220\320\242\320\254 \320\222\320\225\320\251\320\252", nullptr));
+        pushButton_4->setText(QCoreApplication::translate("MainWindow", "\320\255\320\232\320\241\320\237\320\236\320\240\320\242\320\230\320\240\320\236\320\222\320\220\320\242\320\254", nullptr));
     } // retranslateUi
 
 };

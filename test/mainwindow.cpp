@@ -14,13 +14,15 @@
 #include <QRadioButton>
 #include <QCheckBox>
 #include <QDate>
-
+#include "OpenXLSX.hpp"
 #include <QMessageBox>
 #include <QProcessEnvironment>
-
+#include <QFileDialog>
 #include <QInputDialog>
 #include <QLineEdit>
 #include "dialog.h"
+#include "exportexcel.h"
+using namespace OpenXLSX;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -29,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupDatabase();
     bool ok;
     QString encryptionKey = QInputDialog::getText(nullptr, "Пароль БД ",
-                                                  "Происходит нечто необычное!\nЗапомни мудрость - чтобы передать вещ другому челу, выбери чела в таблице тултрансферс, в колонне справа, у которого эта вещ есть, и второй чел который её получит, его надо выбрать в выпадающем списочке сверху, понятно да?\nА теперь вводи сука пароль", QLineEdit::Password,
+                                                  "Происходит нечто необычное!\nА теперь вводи сука пароль", QLineEdit::Password,
                                                   "", &ok);
     qDebug() << encryptionKey;
     if (ok && !encryptionKey.isEmpty()) {
@@ -167,5 +169,38 @@ void MainWindow::on_pushButton_3_clicked()
 {
     Dialog *d = new Dialog();
     d->show();
+}
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    // QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), "",
+    //                                                 tr("Excel Files (*.xls *.xlsx);;All Files (*)"));
+    // XLDocument doc;
+    // doc.create(fileName.toUtf8().constData());
+    // doc.workbook().addWorksheet("Person");
+    // auto wks = doc.workbook().worksheet("Person");
+    // wks.cell("A1").value() = "id";
+    // wks.cell("B1").value() = "fio";
+    // wks.cell("C1").value() = "address";
+    // wks.cell("D1").value() = "profession";
+    // wks.cell("E1").value() = "tab_number";
+
+    // QSqlQuery q;
+    // int i = 2;
+    // q.exec("SELECT * from Person");
+    // while(q.next()){
+    //     wks.cell(("A" + QString::number(i)).toUtf8().constData()) = q.value("id").toString().toUtf8().constData();
+    //     wks.cell(("B" + QString::number(i)).toUtf8().constData()) = q.value("fio").toString().toUtf8().constData();
+    //     wks.cell(("C" + QString::number(i)).toUtf8().constData()) = q.value("address").toString().toUtf8().constData();
+    //     wks.cell(("D" + QString::number(i)).toUtf8().constData()) = q.value("profession").toString().toUtf8().constData();
+    //     wks.cell(("E" + QString::number(i)).toUtf8().constData()) = q.value("tab_number").toString().toUtf8().constData();
+    //     i++;
+    // }
+
+
+    // doc.save();
+    ExportExcel *ex = new ExportExcel();
+    ex->show();
 }
 
