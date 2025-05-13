@@ -24,7 +24,7 @@ void ExportExcel::on_pushButton_clicked()
     XLDocument doc;
     doc.create(fileName.toUtf8().constData());
     if(ui->checkBox->isEnabled()){
-    doc.workbook().addWorksheet("Person");
+    if(doc.workbook().sheetExists("Person")) doc.workbook().addWorksheet("Person");
     auto wks = doc.workbook().worksheet("Person");
     wks.cell("A1").value() = "id";
     wks.cell("B1").value() = "fio";
@@ -44,8 +44,8 @@ void ExportExcel::on_pushButton_clicked()
         i++;
     }
     }
-
-
+    
+    if(ui->checkBox_2->isEnabled())
     doc.save();
 }
 

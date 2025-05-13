@@ -174,32 +174,6 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    // QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), "",
-    //                                                 tr("Excel Files (*.xls *.xlsx);;All Files (*)"));
-    // XLDocument doc;
-    // doc.create(fileName.toUtf8().constData());
-    // doc.workbook().addWorksheet("Person");
-    // auto wks = doc.workbook().worksheet("Person");
-    // wks.cell("A1").value() = "id";
-    // wks.cell("B1").value() = "fio";
-    // wks.cell("C1").value() = "address";
-    // wks.cell("D1").value() = "profession";
-    // wks.cell("E1").value() = "tab_number";
-
-    // QSqlQuery q;
-    // int i = 2;
-    // q.exec("SELECT * from Person");
-    // while(q.next()){
-    //     wks.cell(("A" + QString::number(i)).toUtf8().constData()) = q.value("id").toString().toUtf8().constData();
-    //     wks.cell(("B" + QString::number(i)).toUtf8().constData()) = q.value("fio").toString().toUtf8().constData();
-    //     wks.cell(("C" + QString::number(i)).toUtf8().constData()) = q.value("address").toString().toUtf8().constData();
-    //     wks.cell(("D" + QString::number(i)).toUtf8().constData()) = q.value("profession").toString().toUtf8().constData();
-    //     wks.cell(("E" + QString::number(i)).toUtf8().constData()) = q.value("tab_number").toString().toUtf8().constData();
-    //     i++;
-    // }
-
-
-    // doc.save();
     ExportExcel *ex = new ExportExcel();
     ex->show();
 }

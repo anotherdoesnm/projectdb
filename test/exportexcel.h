@@ -15,6 +15,9 @@ public:
     explicit ExportExcel(QWidget *parent = nullptr);
     ~ExportExcel();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::ExportExcel *ui;
 };

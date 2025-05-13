@@ -30,22 +30,22 @@ public:
     {
         if (ExportExcel->objectName().isEmpty())
             ExportExcel->setObjectName("ExportExcel");
-        ExportExcel->resize(179, 157);
+        ExportExcel->resize(179, 137);
         checkBox = new QCheckBox(ExportExcel);
         checkBox->setObjectName("checkBox");
-        checkBox->setGeometry(QRect(40, 30, 78, 22));
+        checkBox->setGeometry(QRect(40, 10, 78, 22));
         checkBox_2 = new QCheckBox(ExportExcel);
         checkBox_2->setObjectName("checkBox_2");
-        checkBox_2->setGeometry(QRect(40, 50, 78, 22));
+        checkBox_2->setGeometry(QRect(40, 30, 78, 22));
         checkBox_3 = new QCheckBox(ExportExcel);
         checkBox_3->setObjectName("checkBox_3");
-        checkBox_3->setGeometry(QRect(40, 70, 91, 22));
+        checkBox_3->setGeometry(QRect(40, 50, 91, 22));
         checkBox_4 = new QCheckBox(ExportExcel);
         checkBox_4->setObjectName("checkBox_4");
-        checkBox_4->setGeometry(QRect(40, 90, 111, 22));
+        checkBox_4->setGeometry(QRect(40, 70, 111, 22));
         pushButton = new QPushButton(ExportExcel);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(20, 120, 121, 24));
+        pushButton->setGeometry(QRect(30, 100, 121, 24));
 
         retranslateUi(ExportExcel);
 
