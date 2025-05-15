@@ -25,8 +25,10 @@ private slots:
     void on_pushButton_2_clicked();
     void on_radioButton_toggled(bool checked);
     void on_pushButton_3_clicked();
-
+    void on_tableView_clicked(const QModelIndex &index);
     void on_pushButton_4_clicked();
+
+    void on_comboBox_2_currentTextChanged(const QString &arg1);
 
 private:
     void setupDatabase();

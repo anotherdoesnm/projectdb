@@ -54,7 +54,7 @@ public:
 
     void retranslateUi(QDialog *ExportExcel)
     {
-        ExportExcel->setWindowTitle(QCoreApplication::translate("ExportExcel", "Dialog", nullptr));
+        ExportExcel->setWindowTitle(QCoreApplication::translate("ExportExcel", "\320\255\320\232\320\241\320\237\320\236\320\240\320\242", nullptr));
         checkBox->setText(QCoreApplication::translate("ExportExcel", "Person", nullptr));
         checkBox_2->setText(QCoreApplication::translate("ExportExcel", "GardenTools", nullptr));
         checkBox_3->setText(QCoreApplication::translate("ExportExcel", "ToolTransfers", nullptr));

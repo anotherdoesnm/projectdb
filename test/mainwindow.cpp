@@ -22,6 +22,8 @@
 #include <QLineEdit>
 #include "dialog.h"
 #include "exportexcel.h"
+#include <QStyleFactory>
+#include <QApplication>
 using namespace OpenXLSX;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -80,6 +82,10 @@ MainWindow::MainWindow(QWidget *parent)
     // connect(ui->zad, &QComboBox::currentTextChanged, this, &MainWindow::on_comboBox_currentTextChanged);
     setupModel();
     ui->tableView->setModel(model);
+    for (const QString &style : QStyleFactory::keys()) {
+        //qDebug() << style;
+        ui->comboBox_2->addItem(style);
+    }
 }
 
 void MainWindow::setupDatabase()
@@ -176,5 +182,15 @@ void MainWindow::on_pushButton_4_clicked()
 {
     ExportExcel *ex = new ExportExcel();
     ex->show();
+}
+
+void MainWindow::on_tableView_clicked(const QModelIndex &index)
+{
+    this->rowId = index.row();
+}
+
+void MainWindow::on_comboBox_2_currentTextChanged(const QString &arg1)
+{
+    QApplication::setStyle(QStyleFactory::create(arg1));
 }
 
