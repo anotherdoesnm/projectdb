@@ -37,7 +37,6 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QCheckBox *radioButton;
-    QComboBox *zad;
     QPushButton *pushButton_3;
     QPushButton *pushButton_4;
     QStatusBar *statusbar;
@@ -83,17 +82,13 @@ public:
         pushButton_2->setGeometry(QRect(300, 10, 80, 24));
         radioButton = new QCheckBox(scrollAreaWidgetContents);
         radioButton->setObjectName("radioButton");
-        radioButton->setGeometry(QRect(400, 0, 191, 22));
-        zad = new QComboBox(scrollAreaWidgetContents);
-        zad->setObjectName("zad");
-        zad->setGeometry(QRect(400, 20, 221, 21));
-        zad->setMaxVisibleItems(20);
+        radioButton->setGeometry(QRect(400, 10, 171, 22));
         pushButton_3 = new QPushButton(scrollAreaWidgetContents);
         pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setGeometry(QRect(630, 10, 161, 24));
+        pushButton_3->setGeometry(QRect(580, 10, 161, 24));
         pushButton_4 = new QPushButton(scrollAreaWidgetContents);
         pushButton_4->setObjectName("pushButton_4");
-        pushButton_4->setGeometry(QRect(810, 10, 131, 24));
+        pushButton_4->setGeometry(QRect(750, 10, 131, 24));
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         verticalLayout->addWidget(scrollArea);

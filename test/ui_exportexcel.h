@@ -36,7 +36,7 @@ public:
         checkBox->setGeometry(QRect(40, 10, 78, 22));
         checkBox_2 = new QCheckBox(ExportExcel);
         checkBox_2->setObjectName("checkBox_2");
-        checkBox_2->setGeometry(QRect(40, 30, 78, 22));
+        checkBox_2->setGeometry(QRect(40, 30, 91, 22));
         checkBox_3 = new QCheckBox(ExportExcel);
         checkBox_3->setObjectName("checkBox_3");
         checkBox_3->setGeometry(QRect(40, 50, 91, 22));
