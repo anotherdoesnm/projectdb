@@ -22,11 +22,12 @@ FORMS += mainwindow.ui \
 QMAKE_CXX = g++
 QMAKE_CC = gcc
 QMAKE_LINK = g++
-rrr
+
 # Добавляем флаги компиляции
+INCLUDEPATH += "C:/Program Files (x86)/OpenXLSX/include/OpenXLSX"
 QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic
 
 # Include SQLCipher
-INCLUDEPATH += /mingw64/include
+# INCLUDEPATH += /mingw64/include
 INCLUDEPATH += '/c/Program Files (x86)/OpenXLSX/include/OpenXLSX'
-LIBS += -L/mingw64/lib  -L '/c/Program Files (x86)/OpenXLSX/lib' -lopenxlsx
+LIBS += -L"C:/Program Files (x86)/OpenXLSX/lib" -lopenxlsx
