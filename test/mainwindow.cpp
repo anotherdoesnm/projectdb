@@ -24,59 +24,42 @@
 #include "exportexcel.h"
 #include <QStyleFactory>
 #include <QApplication>
+#include <QSqlDriver>
+#include <QPluginLoader>
+
+//GYAQTTTTTTTTTTT
+
 using namespace OpenXLSX;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
 
-    setupDatabase();
-    bool ok;
-    QString encryptionKey = QInputDialog::getText(nullptr, "Пароль БД ",
-                                                  "Происходит нечто необычное!\nА теперь вводи сука пароль", QLineEdit::Password,
-                                                  "", &ok);
-    qDebug() << encryptionKey;
-    if (ok && !encryptionKey.isEmpty()) {
-        QSqlQuery query;
-        query.exec(QString("PRAGMA key = '%1'").arg(encryptionKey));
-
-        if (!query.exec("SELECT 1;")) {
-            qDebug() << "Error: Incorrect encryption key.";
-            qDebug() << query.lastError().text();
-            return;
-        } else {
-            qDebug() << "Database opened successfully with the provided key!";
-        }
+    QPluginLoader loader("sqldrivers/sqlitecipher");
+    if (!loader.load()) {
+        qDebug() << "Error loading QSQLCIPHER plugin:" << loader.errorString();
+    } else {
+        qDebug() << "QSQLCIPHER plugin loaded successfully";
     }
+
+    setupDatabase();
+
 
     qDebug() << "Environment USERNAME:" << QProcessEnvironment::systemEnvironment().value("USERNAME");
     QString currentUser  = QProcessEnvironment::systemEnvironment().value("USERNAME"); // For win
     // QString currentUser  = QProcessEnvironment::systemEnvironment().value("USER"); // For mac linux
     QSqlQuery query;
-    query.prepare("SELECT * FROM Person WHERE FIO = (:currentUser)");
-    qDebug() << currentUser;
-    query.bindValue(":currentUser", currentUser); // Use the currentUser  variable
-    qDebug() << "Current User:" << currentUser; // Debug output
-    QSqlQuery allUsersQuery("SELECT FIO FROM Person");
-    while (allUsersQuery.next()) {
-        QString fio = allUsersQuery.value(0).toString();
-        qDebug() << "FIO in database:" << fio; // Print each FIO in the database
-    }
+    query.prepare("SELECT * FROM Person WHERE FIO = :currentUser");
+    query.bindValue(":currentUser", currentUser);
     if (query.exec()) {
-        if (query.next()) {
-            int count = query.value(0).toInt();
-            qDebug() << "User match count:" << count; // Debug output for user match count
-            if (count > 0) {
-                qDebug() << "User exists in the Person table.";
-            } else {
-                qDebug() << "User does not exist.";
-            }
-        } else {
-            qDebug() << "No results returned from the query.";
+        while (query.next()) {
+            QString fio = query.value(0).toString();
+            qDebug() << "FIO in database:" << fio; // Print each FIO in the database
         }
     } else {
-        qDebug() << "Query execution failed:" << query.lastError().text(); // Debug output for query error
+        qDebug() << "Error executing query:" << query.lastError().text();
     }
+
     ui->setupUi(this);
     connect(ui->radioButton, &QRadioButton::toggled, this, &MainWindow::on_radioButton_toggled);
     // connect(ui->zad, &QComboBox::currentTextChanged, this, &MainWindow::on_comboBox_currentTextChanged);
@@ -90,16 +73,44 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::setupDatabase()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setPassword("1");
+
+
+
+    qDebug() << QSqlDatabase::drivers();
+    QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/plugins/sqldrivers");
+    QSqlDatabase db = QSqlDatabase::addDatabase("SQLITECIPHER");
     db.setDatabaseName("test.db");
     if (!db.open()) {
         qDebug() << "Database error:" << db.lastError().text();
         return;
     }
-    qDebug() << "Database opened successfully";
-}
 
+
+    bool ok;
+    QString encryptionKey = QInputDialog::getText(nullptr, "Пароль БД ",
+                                                  "Происходит нечто необычное!\nА теперь вводи сука пароль", QLineEdit::Password,
+                                                  "", &ok);
+    qDebug() << encryptionKey;
+    if (ok && !encryptionKey.isEmpty()) {
+        QSqlQuery query;
+        query.exec(QString("PRAGMA key = '%1'").arg(encryptionKey));
+        if (query.lastError().isValid()) {
+            qDebug() << "Error setting encryption key:" << query.lastError().text();
+            return;
+        } else {
+            qDebug() << "Encryption key set successfully";
+        }
+    }
+    db.exec("PRAGMA cipher_page_size = 4096; PRAGMA kdf_iter = 256000;PRAGMA cipher_hmac_algorithm = HMAC_SHA512;PRAGMA cipher_kdf_algorithm = PBKDF2_HMAC_SHA512;");
+    QSqlQuery query(db);
+    if (!query.exec("SELECT name FROM sqlite_master WHERE type = 'table'")) {
+        qDebug() << "Error executing query:" << query.lastError().text();
+    } else {
+        while (query.next()) {
+            qDebug() << "Table:" << query.value(0).toString();
+        }
+    }
+}
 void MainWindow::setupModel()
 {
     model = new QSqlRelationalTableModel(this);
@@ -107,7 +118,10 @@ void MainWindow::setupModel()
     model->setTable("Person");
     if (!model->select()) {
         qDebug() << "Error loading Person table:" << model->lastError().text();
+    } else {
+        qDebug() << "Person table loaded successfully";
     }
+    ui->tableView->setModel(model);
 }
 
 
