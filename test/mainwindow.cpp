@@ -97,45 +97,14 @@ void MainWindow::setupDatabase()
         return;
     }
     QSqlQuery query(db);
-    query.exec(QString("PRAGMA key = '12';"));
-    if (ok && !encryptionKey.isEmpty()) {
-        if (query.lastError().isValid()) {
-            qDebug() << "Error setting encryption key:" << query.lastError().text();
-            return;
-        } else {
-            qDebug() << "Encryption key set successfully";
-        }
-    } else {
-        qDebug() << "No encryption key entered";
-        return;
-    }
+    query.exec(QString("PRAGMA key = '%1';").arg(encryptionKey));
     QSqlQuery query_pomogite(db);
     query_pomogite.exec("PRAGMA cipher_page_size = 4096;");
     query_pomogite.exec("PRAGMA kdf_iter = 256000;");
     query_pomogite.exec("PRAGMA cipher_hmac_algorithm = HMAC_SHA512;");
     query_pomogite.exec("PRAGMA cipher_kdf_algorithm = PBKDF2_HMAC_SHA512;");
 
-    qDebug() << query_pomogite.lastError().isValid();
     // Test query to check database accessibility
-    QSqlQuery testQuery(db);
-    if (!testQuery.exec("SELECT count(*) FROM sqlite_master WHERE type='table';")) {
-        qDebug() << "Error executing test query:" << testQuery.lastError().text();
-    } else {
-        if (testQuery.next()) {
-            int tableCount = testQuery.value(0).toInt();
-            qDebug() << "Number of tables in database:" << tableCount;
-        }
-    }
-
-    QSqlQuery query2(db);
-    if (!query2.exec("SELECT name FROM sqlite_master WHERE type = 'table';")) {
-        qDebug() << "Error executing query:" << query2.lastError().text();
-    } else {
-        qDebug() << "Tables in database:";
-        while (query2.next()) {
-            qDebug() << "Table:" << query2.value(0).toString();
-        }
-    }
 }
 void MainWindow::setupModel()
 {
