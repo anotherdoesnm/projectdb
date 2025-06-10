@@ -27,7 +27,6 @@
 #include <QSqlDriver>
 #include <QPluginLoader>
 
-//GYAQTTTTTTTTTTT
 
 using namespace OpenXLSX;
 MainWindow::MainWindow(QWidget *parent)
@@ -37,9 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     QPluginLoader loader("sqldrivers/sqlitecipher");
     if (!loader.load()) {
-        qDebug() << "Error loading QSQLCIPHER plugin:" << loader.errorString();
+        qDebug() << "Error loading SQLITECIPHER plugin:" << loader.errorString();
     } else {
-        qDebug() << "QSQLCIPHER plugin loaded successfully";
+        qDebug() << "SQLITECIPHER plugin loaded successfully";
     }
 
     setupDatabase();
@@ -49,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
     QString currentUser  = QProcessEnvironment::systemEnvironment().value("USERNAME"); // For win
     // QString currentUser  = QProcessEnvironment::systemEnvironment().value("USER"); // For mac linux
     QSqlQuery query;
-    query.prepare("SELECT * FROM Person WHERE FIO = :currentUser");
+    query.prepare("SELECT FIO FROM Person WHERE FIO = :currentUser");
     query.bindValue(":currentUser", currentUser);
     if (query.exec()) {
         while (query.next()) {
@@ -73,41 +72,68 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::setupDatabase()
 {
-
-
-
+    QString dbPath = QFileInfo("test.db").absoluteFilePath();
+    QFileInfo dbFileInfo(dbPath);
+    qDebug() << "Database file path:" << dbPath;
+    qDebug() << "Database file exists:" << dbFileInfo.exists() << ", size:" << dbFileInfo.size() << "bytes";
     qDebug() << QSqlDatabase::drivers();
-    QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/plugins/sqldrivers");
-    QSqlDatabase db = QSqlDatabase::addDatabase("SQLITECIPHER");
-    db.setDatabaseName("test.db");
-    if (!db.open()) {
-        qDebug() << "Database error:" << db.lastError().text();
-        return;
-    }
 
+    // QSqlDatabase db = QSqlDatabase::addDatabase("SQLITECIPHER");
+    // db.setDatabaseName(dbPath);
 
     bool ok;
     QString encryptionKey = QInputDialog::getText(nullptr, "Пароль БД ",
                                                   "Происходит нечто необычное!\nА теперь вводи сука пароль", QLineEdit::Password,
                                                   "", &ok);
     qDebug() << encryptionKey;
+
+
+    QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/plugins/sqldrivers");
+    QSqlDatabase db = QSqlDatabase::addDatabase("SQLITECIPHER");
+    db.setConnectOptions("QSQLITE_USE_CIPHER=sqlcipher; SQLCIPHER_LEGACY=1");
+    db.setDatabaseName(dbPath);
+    if (!db.open()) {
+        qDebug() << "Database error:" << db.lastError().text();
+        return;
+    }
+    QSqlQuery query(db);
+    query.exec(QString("PRAGMA key = '12';"));
     if (ok && !encryptionKey.isEmpty()) {
-        QSqlQuery query;
-        query.exec(QString("PRAGMA key = '%1'").arg(encryptionKey));
         if (query.lastError().isValid()) {
             qDebug() << "Error setting encryption key:" << query.lastError().text();
             return;
         } else {
             qDebug() << "Encryption key set successfully";
         }
-    }
-    db.exec("PRAGMA cipher_page_size = 4096; PRAGMA kdf_iter = 256000;PRAGMA cipher_hmac_algorithm = HMAC_SHA512;PRAGMA cipher_kdf_algorithm = PBKDF2_HMAC_SHA512;");
-    QSqlQuery query(db);
-    if (!query.exec("SELECT name FROM sqlite_master WHERE type = 'table'")) {
-        qDebug() << "Error executing query:" << query.lastError().text();
     } else {
-        while (query.next()) {
-            qDebug() << "Table:" << query.value(0).toString();
+        qDebug() << "No encryption key entered";
+        return;
+    }
+    QSqlQuery query_pomogite(db);
+    query_pomogite.exec("PRAGMA cipher_page_size = 4096;");
+    query_pomogite.exec("PRAGMA kdf_iter = 256000;");
+    query_pomogite.exec("PRAGMA cipher_hmac_algorithm = HMAC_SHA512;");
+    query_pomogite.exec("PRAGMA cipher_kdf_algorithm = PBKDF2_HMAC_SHA512;");
+
+    qDebug() << query_pomogite.lastError().isValid();
+    // Test query to check database accessibility
+    QSqlQuery testQuery(db);
+    if (!testQuery.exec("SELECT count(*) FROM sqlite_master WHERE type='table';")) {
+        qDebug() << "Error executing test query:" << testQuery.lastError().text();
+    } else {
+        if (testQuery.next()) {
+            int tableCount = testQuery.value(0).toInt();
+            qDebug() << "Number of tables in database:" << tableCount;
+        }
+    }
+
+    QSqlQuery query2(db);
+    if (!query2.exec("SELECT name FROM sqlite_master WHERE type = 'table';")) {
+        qDebug() << "Error executing query:" << query2.lastError().text();
+    } else {
+        qDebug() << "Tables in database:";
+        while (query2.next()) {
+            qDebug() << "Table:" << query2.value(0).toString();
         }
     }
 }
