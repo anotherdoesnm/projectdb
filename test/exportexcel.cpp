@@ -27,7 +27,7 @@ void ExportExcel::on_pushButton_clicked()
                                                     tr("Excel Files (*.xlsx);;All Files (*)"));
     if(fileName == "") return;
     XLDocument doc;
-    doc.create(fileName.toUtf8().constData());
+    doc.create(fileName.toUtf8().constData(),true);
     if(ui->checkBox->isChecked()){
     if(!doc.workbook().sheetExists("Person")) doc.workbook().addWorksheet("Person");
     auto wks = doc.workbook().worksheet("Person");

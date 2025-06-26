@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'dialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.17
+** Created by: Qt User Interface Compiler version 6.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,6 +10,7 @@
 #define UI_DIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAbstractButton>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
@@ -32,35 +33,35 @@ public:
     void setupUi(QDialog *Dialog)
     {
         if (Dialog->objectName().isEmpty())
-            Dialog->setObjectName(QString::fromUtf8("Dialog"));
+            Dialog->setObjectName("Dialog");
         Dialog->resize(400, 148);
         buttonBox = new QDialogButtonBox(Dialog);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setObjectName("buttonBox");
         buttonBox->setGeometry(QRect(10, 110, 361, 32));
         buttonBox->setOrientation(Qt::Orientation::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok);
         comboBox = new QComboBox(Dialog);
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+        comboBox->setObjectName("comboBox");
         comboBox->setGeometry(QRect(60, 20, 311, 24));
         comboBox_2 = new QComboBox(Dialog);
-        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
+        comboBox_2->setObjectName("comboBox_2");
         comboBox_2->setGeometry(QRect(60, 50, 311, 24));
         label = new QLabel(Dialog);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName("label");
         label->setGeometry(QRect(8, 20, 51, 20));
         label_2 = new QLabel(Dialog);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName("label_2");
         label_2->setGeometry(QRect(18, 50, 41, 20));
         comboBox_3 = new QComboBox(Dialog);
-        comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
+        comboBox_3->setObjectName("comboBox_3");
         comboBox_3->setGeometry(QRect(60, 80, 311, 24));
         label_3 = new QLabel(Dialog);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName("label_3");
         label_3->setGeometry(QRect(28, 80, 31, 20));
 
         retranslateUi(Dialog);
-        QObject::connect(buttonBox, SIGNAL(accepted()), Dialog, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), Dialog, SLOT(reject()));
+        QObject::connect(buttonBox, &QDialogButtonBox::accepted, Dialog, qOverload<>(&QDialog::accept));
+        QObject::connect(buttonBox, &QDialogButtonBox::rejected, Dialog, qOverload<>(&QDialog::reject));
 
         QMetaObject::connectSlotsByName(Dialog);
     } // setupUi

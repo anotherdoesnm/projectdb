@@ -67,7 +67,6 @@
 #define __FLT64X_HAS_QUIET_NAN__ 1
 #define __UINT_LEAST8_MAX__ 0xff
 #define __GCC_ATOMIC_BOOL_LOCK_FREE 2
-#define __LAHF_SAHF__ 1
 #define __FLT128_DENORM_MIN__ 6.47517511943802511092443895822764655e-4966F128
 #define __UINTMAX_TYPE__ long long unsigned int
 #define __cpp_nsdmi 200809L

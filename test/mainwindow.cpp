@@ -34,12 +34,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
 
-    QPluginLoader loader("sqldrivers/sqlitecipher");
-    if (!loader.load()) {
-        qDebug() << "Error loading SQLITECIPHER plugin:" << loader.errorString();
-    } else {
-        qDebug() << "SQLITECIPHER plugin loaded successfully";
-    }
+    //QPluginLoader loader("sqldrivers/sqlitecipher");
+    //if (!loader.load()) {
+    //    qDebug() << "Error loading SQLITECIPHER plugin:" << loader.errorString();
+    //} else {
+    //    qDebug() << "SQLITECIPHER plugin loaded successfully";
+    //}
 
     setupDatabase();
 
@@ -89,8 +89,8 @@ void MainWindow::setupDatabase()
 
 
     QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/plugins/sqldrivers");
-    QSqlDatabase db = QSqlDatabase::addDatabase("SQLITECIPHER");
-    db.setConnectOptions("QSQLITE_USE_CIPHER=sqlcipher; SQLCIPHER_LEGACY=1");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    //db.setConnectOptions("QSQLITE_USE_CIPHER=sqlcipher; SQLCIPHER_LEGACY=1");
     db.setDatabaseName(dbPath);
     if (!db.open()) {
         qDebug() << "Database error:" << db.lastError().text();

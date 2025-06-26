@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.17
+** Created by: Qt User Interface Compiler version 6.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -45,53 +45,53 @@ public:
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
+            MainWindow->setObjectName("MainWindow");
         MainWindow->resize(992, 647);
         MainWindow->setMinimumSize(QSize(992, 647));
         MainWindow->setMaximumSize(QSize(992, 647));
         centralwidget = new QWidget(MainWindow);
-        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        centralwidget->setObjectName("centralwidget");
         verticalLayout = new QVBoxLayout(centralwidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName("verticalLayout");
         scrollArea = new QScrollArea(centralwidget);
-        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setObjectName("scrollArea");
         scrollArea->setMinimumSize(QSize(974, 607));
         scrollArea->setMaximumSize(QSize(974, 607));
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 972, 605));
         comboBox = new QComboBox(scrollAreaWidgetContents);
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->addItem(QString());
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+        comboBox->setObjectName("comboBox");
         comboBox->setGeometry(QRect(10, 10, 91, 24));
         comboBox->setMinimumSize(QSize(0, 24));
         tableView = new QTableView(scrollAreaWidgetContents);
-        tableView->setObjectName(QString::fromUtf8("tableView"));
+        tableView->setObjectName("tableView");
         tableView->setGeometry(QRect(15, 51, 941, 531));
         saveButton = new QPushButton(scrollAreaWidgetContents);
-        saveButton->setObjectName(QString::fromUtf8("saveButton"));
+        saveButton->setObjectName("saveButton");
         saveButton->setGeometry(QRect(110, 10, 91, 24));
         pushButton = new QPushButton(scrollAreaWidgetContents);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setObjectName("pushButton");
         pushButton->setGeometry(QRect(210, 10, 80, 24));
         pushButton_2 = new QPushButton(scrollAreaWidgetContents);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setObjectName("pushButton_2");
         pushButton_2->setGeometry(QRect(300, 10, 80, 24));
         radioButton = new QCheckBox(scrollAreaWidgetContents);
-        radioButton->setObjectName(QString::fromUtf8("radioButton"));
+        radioButton->setObjectName("radioButton");
         radioButton->setGeometry(QRect(390, 10, 171, 22));
         pushButton_3 = new QPushButton(scrollAreaWidgetContents);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_3->setObjectName("pushButton_3");
         pushButton_3->setGeometry(QRect(560, 10, 161, 24));
         pushButton_4 = new QPushButton(scrollAreaWidgetContents);
-        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+        pushButton_4->setObjectName("pushButton_4");
         pushButton_4->setGeometry(QRect(720, 10, 131, 24));
         comboBox_2 = new QComboBox(scrollAreaWidgetContents);
-        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
+        comboBox_2->setObjectName("comboBox_2");
         comboBox_2->setGeometry(QRect(860, 10, 101, 24));
         scrollArea->setWidget(scrollAreaWidgetContents);
 
@@ -99,7 +99,7 @@ public:
 
         MainWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
+        statusbar->setObjectName("statusbar");
         MainWindow->setStatusBar(statusbar);
 
         retranslateUi(MainWindow);

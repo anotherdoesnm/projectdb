@@ -43,9 +43,9 @@ LIBS += -L"C:/Program Files (x86)/OpenXLSX/lib" -lopenxlsx
 
 INCLUDEPATH += "C:\msys64\mingw64\sqldrivers\include"
 LIBS += -L"C:\msys64\mingw64\sqldrivers" -lsqlcipher -lcrypto
-
+QMAKE_LIBS=-ltiff -lgraphite2 -lbz2 -lusp10 -lgdi32 -lrpcrt4  -lusp10 -lgdi32 -lrpcrt4
 INCLUDEPATH += "C:\Users\Student04\Documents\GitHub\projectdb\test\sqldrivers\include"
-LIBS += -L"C:\Users\Student04\Documents\GitHub\projectdb\test\sqldrivers" -lsqlcipher -lcrypto
+LIBS += -L"C:\Users\Student04\Documents\GitHub\projectdb\test\sqldrivers"
 target.path = $C:/msys64/mingw64/sqldrivers/sqldrivers
 INSTALLS += target
 DEFINES += QT_SQL_CIPHER
