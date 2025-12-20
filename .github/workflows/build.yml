@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout
+        uses: actions/checkout@v6
       - name: Install conan
         uses: conan-io/setup-conan@v1
       - name: Detect profile
