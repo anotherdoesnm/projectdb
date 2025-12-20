@@ -1,0 +1,14 @@
+on: push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout
+      - name: Install conan
+        uses: conan-io/setup-conan@v1
+      - name: Detect profile
+        run: conan profile detect --force
+      - name: Install packages
+        run: conan install . --output-folder=build --build=missing
