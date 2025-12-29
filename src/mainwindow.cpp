@@ -14,7 +14,7 @@
 #include <QRadioButton>
 #include <QCheckBox>
 #include <QDate>
-#include "OpenXLSX.hpp"
+#include "OpenXLSX/OpenXLSX.hpp"
 #include <QMessageBox>
 #include <QProcessEnvironment>
 #include <QFileDialog>

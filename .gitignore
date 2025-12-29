@@ -37,3 +37,4 @@
 project/.vs/
 .vs/
 project\project\x64\Debug
+build/

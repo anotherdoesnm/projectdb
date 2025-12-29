@@ -1,6 +1,6 @@
 #include "exportexcel.h"
 #include "ui_exportexcel.h"
-#include "OpenXLSX.hpp"
+#include "OpenXLSX/OpenXLSX.hpp"
 #include <QFileDialog>
 #include <QSqlQuery>
 #include <QMessageBox>
