@@ -1,5 +1,5 @@
 ﻿#include "mainwindow.h"
-#include "ui_mainwindow.h"  // Add this line
+#include "../ui/ui_mainwindow.h"  // Add this line
 #include <QFile>
 #include <QSqlDatabase>
 #include <QSqlError>

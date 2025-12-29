@@ -1,5 +1,5 @@
 #include "exportexcel.h"
-#include "ui_exportexcel.h"
+#include "../ui/ui_exportexcel.h"
 #include "OpenXLSX/OpenXLSX.hpp"
 #include <QFileDialog>
 #include <QSqlQuery>

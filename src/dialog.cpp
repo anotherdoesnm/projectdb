@@ -1,5 +1,5 @@
 #include "dialog.h"
-#include "ui_dialog.h"
+#include "../ui/ui_dialog.h"
 #include <QSqlQuery>
 #include <QDate>
 #include <QSqlError>
